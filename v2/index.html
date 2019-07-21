@@ -4,36 +4,38 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
   <script src="js/data.js"></script>
-  <script src="js/autocomplete.js"></script>
   <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
 </head>
 
 <body>
 
   <h1>somMeLier</h1>
-
-
   <div class="grid-container">
     <div class="header">Header</div>
     <div class="filters">Filters
       <form class="form-inline" autocomplete="off">
-        <div class="autocomplete" style="width:300px;">
-          <input type="text" id="country" placeholder="Select country" name="country">
+        <div style="width:300px;">
+          <select id="country" name="country" data-placeholder="Choose a Countries..." class="chosen-select" multiple>
+          </select>
         </div>
-        <div class="autocomplete" style="width:300px;">
-          <input type="text" id="grape" placeholder="Select grape" name="grape">
+        <div style="width:300px;">
+          <select id="grape" data-placeholder="Select grapes" name="grape" class="chosen-select" multiple>
+          </select>
         </div>
-        <div class="autocomplete" style="width:300px;">
-          <input type="text" id="price" placeholder="Select price" name="price">
+        <div style="width:300px;">
+          <select id="price" data-placeholder="Select price" name="price" class="chosen-select" multiple>
+          </select>
         </div>
-        <div class="autocomplete" style="width:300px;">
-          <input type="text" id="country" placeholder="Select country" name="country">
+        <div style="width:300px;">
+          <select id="keywords" data-placeholder="Select review keywords" name="keywords" class="chosen-select"
+            multiple>
+          </select>
         </div>
-        <div class="autocomplete" style="width:300px;">
-          <input type="text" id="keywords" placeholder="Select review keywords" name="keywords">
-        </div>
-        <div class="autocomplete" style="width:300px;">
-          <button type="submit">Search</button>
+        <div style="width:300px;">
+          <button type="button" class="reset" >Clear</button>
         </div>
       </form>
     </div>
@@ -50,7 +52,12 @@
 </body>
 
 <script>
-  loadData()
+  refresh()
+
+  $(".reset").click(function () {
+    $('.chosen-select').val('').trigger('chosen:updated');
+    filteredData = allData;
+  });
 </script>
 
 </html>
