@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/autocomplete.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <h1>somMeLier</h1>
+
+
+  <div class="grid-container">
+    <div class="header">Header</div>
+    <div class="filters">Filters
+      <form class="form-inline" autocomplete="off">
+        <div class="autocomplete" style="width:300px;">
+          <input type="text" id="country" placeholder="Select country" name="country">
+        </div>
+        <div class="autocomplete" style="width:300px;">
+          <input type="text" id="grape" placeholder="Select grape" name="grape">
+        </div>
+        <div class="autocomplete" style="width:300px;">
+          <input type="text" id="price" placeholder="Select price" name="price">
+        </div>
+        <div class="autocomplete" style="width:300px;">
+          <input type="text" id="country" placeholder="Select country" name="country">
+        </div>
+        <div class="autocomplete" style="width:300px;">
+          <input type="text" id="keywords" placeholder="Select review keywords" name="keywords">
+        </div>
+        <div class="autocomplete" style="width:300px;">
+          <button type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="map">Map</div>
+    <div class="price">Price</div>
+    <div class="grapes">Grapes</div>
+    <div class="keywords">Keywords</div>
+    <div class="results">Results</div>
+  </div>
+
+  <p>This is the v2.0 of the MIDS W209 Summer 2019 group project by:</p>
+  <p>[Fill in your name], Spyros Garyfallos</p>
+
+</body>
+
+<script>
+  loadData()
+</script>
+
+</html>
