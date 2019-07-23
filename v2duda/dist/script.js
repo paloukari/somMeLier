@@ -17,12 +17,19 @@ var simulation = d3.forceSimulation()
   .force("x", d3.forceX(width/2).strength(.02))
   .force("y", d3.forceX(height/2).strength(.02))
   .force("collide", d3.forceCollide(function(d){
-              return radiusScale(d["Sales (Real)"]) + 1
+              return radiusScale(d["count"]) + 1
             })
         );
 
 d3.queue()
-  .defer(d3.csv, "https://raw.githubusercontent.com/rufuspollock/music-sales/master/data/data.csv")
+  .defer(d3.csv, "data/database.csv", function(d){
+      var grapes = {
+        grape: d.grapes.split(",").flat(),
+        type: d.types,
+        count: 1
+      }
+      return grapes;
+    })
   .await(ready)
 
 
@@ -40,11 +47,12 @@ d3.queue()
 // });
 
 d3.csv("data/database.csv", function(d){
-    return {
+    var grape_types= {
       grape: d.grapes.split(",").flat(),
       type: d.types,
       count: 1
     };
+    return grape_types;
   }, function(error, rows) {
       console.log(rows);
     });
@@ -62,14 +70,13 @@ d3.csv("data/database.csv", function(d){
 // }, {});
 
 function ready(error, datapoints){
-
   var circs = chart.selectAll(".artist")
     .data(datapoints)
     .enter()
     .append("circle")
     .attrs({"class": "artistic",
             "r": function(d){
-              return radiusScale(d["Sales (Real)"])
+              return radiusScale(d["count"])
             },
             "fill": "purple"
            })
