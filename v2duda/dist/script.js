@@ -11,63 +11,22 @@ var chart = d3.select("#chart")
   .append("g")
   .attr("transform", "translate("+ 0 + "," + height/2 +")")
 
-var radiusScale = d3.scaleSqrt().domain([0,34000]).range([3,25])
+var radiusScale = d3.scaleSqrt().domain([0,1250]).range([3,40])
 
 var simulation = d3.forceSimulation()
   .force("x", d3.forceX(width/2).strength(.02))
   .force("y", d3.forceX(height/2).strength(.02))
   .force("collide", d3.forceCollide(function(d){
-              return radiusScale(d["count"]) + 1
+              return radiusScale(d["Count"]) + 1
             })
         );
 
+reds=d3.scaleLinear().domain([0,189]).range(["#801B4D","#CC2016"])
+whites=d3.scaleLinear().domain([190,322]).range(["#43C6AC","#F8FFAE"])
+
 d3.queue()
-  .defer(d3.csv, "data/database.csv", function(d){
-      var grapes = {
-        grape: d.grapes.split(",").flat(),
-        type: d.types,
-        count: 1
-      }
-      return grapes;
-    })
+  .defer(d3.csv, "data/grapes_db.csv")
   .await(ready)
-
-
-// var grapes;
-//
-// d3.csv("example.csv", function(d) {
-//   return {
-//     year: new Date(+d.Year, 0, 1), // convert "Year" column to Date
-//     make: d.Make,
-//     model: d.Model,
-//     length: +d.Length // convert "Length" column to number
-//   };
-// }, function(error, rows) {
-//   console.log(rows);
-// });
-
-d3.csv("data/database.csv", function(d){
-    var grape_types= {
-      grape: d.grapes.split(",").flat(),
-      type: d.types,
-      count: 1
-    };
-    return grape_types;
-  }, function(error, rows) {
-      console.log(rows);
-    });
-
-
-// var countedGrapes = grapes.reduce(function (allGrapes, grape) {
-//   if (grape in allGrapes) {
-//     allGrapes[grape]++;
-//   }
-//   else {
-//     allGrapes[grape] = 1;
-//   }
-//   return allGrapes;
-//   console.log(allGrapes)
-// }, {});
 
 function ready(error, datapoints){
   var circs = chart.selectAll(".artist")
@@ -76,13 +35,22 @@ function ready(error, datapoints){
     .append("circle")
     .attrs({"class": "artistic",
             "r": function(d){
-              return radiusScale(d["count"])
+              return radiusScale(d["Count"])
             },
-            "fill": "purple"
+            "fill": function(d){if(d["Type"]==='Red wine'){
+              return reds(d.id);
+            }
+            else{
+              return whites(d.id);
+            }}
            })
 
    simulation.nodes(datapoints)
     .on("tick", ticked)
+    .on("mouseover",function(d, i) {
+      hoverText.text(d.Grape,": ",d.Count);
+      hoverGroup.style("visibility","visible")
+})
 
   function ticked(){
     circs
@@ -91,3 +59,19 @@ function ready(error, datapoints){
     })
   }
 }
+
+//setting the houver group
+var hoverGroup = chart.append("g").style("visibility","hidden");
+
+     hoverGroup.append("rect")
+     .attr("id","steps")
+     .attr("x",0)
+     .attr("y",0)
+     .attr("width",50)
+     .attr("height",20)
+     .attr("fill","rgb(255, 122, 182)")
+     .attr("stroke-width","1px")
+     .attr("stroke","gray");
+
+//setting the hover text
+var hoverText = hoverGroup.append("text").attr("x",7).attr("y",15);
