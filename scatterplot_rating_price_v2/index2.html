@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <meta charset="UTF-8">
+  <title>somMeLier Viz</title>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+<body align = "center">
+	<h1 style="text-align: center;"><span style="color: #993366;">somMeLier</span></h1>
+<table >
+<tbody>
+<tr style="height: 44.5px;">
+<td style="width: 184px; background-color: #722f37; height: 44.5px;">
+<p><strong><span style="color: #ffffff;">About</span></strong></p>
+</td>
+<td id="chart" rowspan="5">&nbsp;<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js'></script>
+<script src='https://d3js.org/d3-shape.v1.min.js'></script>
+    <script  src="js/index22.js"></script></td>
+<td id="chart" rowspan="5" style="background-color: #F3F3F3; vertical-align: text-top; text-align: left; width: 284px">
+	<!-- Price Range--> 
+	<link rel="stylesheet" href="https://demos.jquerymobile.com/1.4.2/css/themes/default/jquery.mobile-1.4.2.min.css">  
+	<script src="https://demos.jquerymobile.com/1.4.2/js/jquery.js"></script>
+	<script src="https://demos.jquerymobile.com/1.4.2/js/jquery.mobile-1.4.2.min.js"></script>
+
+	<form>
+	    <div data-role="rangeslider">
+	        <label for="range-1a">Price Range:</label>
+	        <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="40">
+	        <label for="range-1b">Price Range:</label>
+	        <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
+	    </div>
+	</form>
+
+	<!-- Rating--> 
+	<form>
+	    <div data-role="rangeslider">
+	        <label for="range-2a">Rating:</label>
+	        <input type="range" name="range-2a" id="range-2a" min="0" max="100" value="40">
+	        <label for="range-2b">Rating:</label>
+	        <input type="range" name="range-2b" id="range-2b" min="0" max="100" value="80">
+	    </div>
+	</form>
+
+	<!-- Grapes--> 
+	<p>Grapes:</p>
+	<div>
+	  <input type="checkbox" id="Cabernet_Franc" value="Cabernet_Franc"checked>
+	  <label>Cabernet Franc</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Cabernet_Sauvignon" value="Cabernet_Sauvignon"checked>
+	  <label>Cabernet Sauvignon</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Chardonnay" value="Chardonnay"checked>
+	  <label>Chardonnay</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Grenache" value="Grenache"checked>
+	  <label>Grenache</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Malbec" value="Malbec"checked>
+	  <label>Malbec</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Merlot" value="Merlot"checked>
+	  <label>Merlot</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Pinot" value="Pinot"checked>
+	  <label>Pinot Noir</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Riesling" value="Riesling"checked>
+	  <label>Riesling</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Sauvignon" value="Sauvignon"checked>
+	  <label>Sauvignon Blanc</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Syrah" value="Syrah"checked>
+	  <label>Shiraz/Syrah</label>
+	</div>
+
+	<!-- Continents--> 
+	<p>Continents:</p>
+	<div>
+	  <input type="checkbox" id="North_America" value="North_America" checked>
+	  <label>North America</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="South_America" value="South_America"checked>
+	  <label>South America</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Europe" value="Europe"checked>
+	  <label>Europe</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Africa" value="Africa"checked>
+	  <label>Africa</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Asia" value="Asia"checked>
+	  <label>Asia</label>
+	</div>
+	<div>
+	  <input type="checkbox" id="Oceania" value="Oceania"checked>
+	  <label>Oceania</label>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</td>
+</tr>
+<tr style="height: 44px;">
+<td style="width: 184px; background-color: #722f37; height: 44px;"><strong><span style="color: #ffffff;">World Cloud</span></strong></td>
+</tr>
+<tr style="height: 44px;">
+<td style="width: 184px; background-color: #722f37; height: 44px;"><span style="color: #ffffff;"><strong>Best Wines by Country</strong></span></td>
+</tr>
+<tr style="height: 44px;">
+<td style="width: 184px; background-color: #963e48; height: 44px;"><span style="color: #ffffff;"><strong>Wine per Rating</strong></span></td>
+</tr>
+<tr style="height: 44px;">
+<td style="width: 184px; background-color: #722f37; height: 44px;"><strong><span style="color: #ffffff;">Grapes by Country</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<hr style="background-color: #722f37; height: 2px;" />
+<p>Copyright (c) 2019 somMeLier Team&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://github.com/paloukari/somMeLier" target="_blank"><img src="http://tiny.cc/pumd9y" alt="" width="85" height="31" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
