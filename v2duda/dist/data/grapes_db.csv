@@ -1,324 +1,230 @@
 id,Type,Grape,Count
-0,Red wine, Alfrocheiro Preto,17
-1,Red wine, Alicante Bouschet,32
-2,Red wine, Ancellotta,2
-3,Red wine, Antão Vaz,2
-4,Red wine, Aragonez,30
-5,Red wine, Arinto de Bucelas,2
-6,Red wine, Baga,3
-7,Red wine, Barbera,1
-8,Red wine, Bastardo Magarachsky,3
-9,Red wine, Bonarda,9
-10,Red wine, Bovale,1
-11,Red wine, Cabernet Franc,88
-12,Red wine, Cabernet Sauvignon,80
-13,Red wine, Canaiolo Blanco,3
-14,Red wine, Canaiolo Nero,19
-15,Red wine, Cannonau,1
-16,Red wine, Carignan,17
-17,Red wine, Cariñena,2
-18,Red wine, Carménère,25
-19,Red wine, Castelao,34
-20,Red wine, Ciliegiolo,3
-21,Red wine, Cinsault,9
-22,Red wine, Cinsaut,3
-23,Red wine, Colorino del Valdarno,5
-24,Red wine, Corvina,12
-25,Red wine, Corvina Veronese,7
-26,Red wine, Corvinone,28
-27,Red wine, Croatina,2
-28,Red wine, Dolcetto,2
-29,Red wine, Donzelinho Tinto,1
-30,Red wine, Forsellina,2
-31,Red wine, Frappato,1
-32,Red wine, Furmint,1
-33,Red wine, Garnacha,10
-34,Red wine, Garnacha Peluda,1
-35,Red wine, Garnacha Tinta,4
-36,Red wine, Graciano,8
-37,Red wine, Grand Noir,1
-38,Red wine, Grenache,61
-39,Red wine, Grenache Blanc,1
-40,Red wine, Jaen,3
-41,Red wine, Malbec,46
-42,Red wine, Malvasia,3
-43,Red wine, Malvasia Nera,6
-44,Red wine, Mammolo,1
-45,Red wine, Mandón,1
-46,Red wine, Marsanne,1
-47,Red wine, Mayolet,1
-48,Red wine, Mazuelo,8
-49,Red wine, Merlot,139
-50,Red wine, Molinara,15
-51,Red wine, Monastrell,6
-52,Red wine, Montepulciano,7
-53,Red wine, Moreto,3
-54,Red wine, Mourvedre,32
-55,Red wine, Muscardin,1
-56,Red wine, Negroamaro,2
-57,Red wine, Nerello Cappuccio,7
-58,Red wine, Nerello Mascalese,4
-59,Red wine, Nero d'Avola,2
-60,Red wine, Nero di Troia,2
-61,Red wine, Nocera,3
-62,Red wine, Oseleta,18
-63,Red wine, Pais,1
-64,Red wine, Petit Verdot,56
-65,Red wine, Petite Sirah,2
-66,Red wine, Picardan,1
-67,Red wine, Piedirosso,11
-68,Red wine, Pinot Noir,11
-69,Red wine, Pinotage,3
-70,Red wine, Poulsard,1
-71,Red wine, Primitivo,4
-72,Red wine, Raboso Piave,2
-73,Red wine, Raboso Veronese,1
-74,Red wine, Rondinella,37
-75,Red wine, Roussanne,2
-76,Red wine, Rufete,6
-77,Red wine, Sangiovese,58
-78,Red wine, Shiraz/Syrah,40
-79,Red wine, Souzao,9
-80,Red wine, Susumaniello,3
-81,Red wine, Tannat,7
-82,Red wine, Tempranillo,44
-83,Red wine, Tinta Amarela,13
-84,Red wine, Tinta Barroca,37
-85,Red wine, Tinta Caiada,2
-86,Red wine, Tinta Cão,4
-87,Red wine, Tinta Francisca,2
-88,Red wine, Tinta Roriz,95
-89,Red wine, Tinta de toro,4
-90,Red wine, Tinto Cao,11
-91,Red wine, Tinto Fino,1
-92,Red wine, Tintore Di Tramonti,1
-93,Red wine, Touriga Franca,116
-94,Red wine, Touriga Francesa,5
-95,Red wine, Touriga Nacional,67
-96,Red wine, Trincadeira,26
-97,Red wine, Trousseau,1
-98,Red wine, Uva di Troia,2
-99,Red wine, Vaccareze,1
-100,Red wine, Vespolina,2
-101,Red wine, Viognier,2
-102,Red wine, Viura,5
-103,Red wine, Zinfandel,2
-104,Red wine,Agiorgitiko,2
-105,Red wine,Aglianico,17
-106,Red wine,Alfrocheiro Preto,3
-107,Red wine,Alicante Bouschet,24
-108,Red wine,Aragonez,11
-109,Red wine,Arinarnoa,2
-110,Red wine,Baga,7
-111,Red wine,Barbera,27
-112,Red wine,Bonarda,3
-113,Red wine,Cabernet Franc,25
-114,Red wine,Cabernet Sauvignon,372
-115,Red wine,Canaiolo Nero,2
-116,Red wine,Carignan,30
-117,Red wine,Carménère,61
-118,Red wine,Castelao,6
-119,Red wine,Cinsault,6
-120,Red wine,Corvina,31
-121,Red wine,Counoise,1
-122,Red wine,Croatina,2
-123,Red wine,Côt,1
-124,Red wine,Dolcetto,9
-125,Red wine,Gamay,9
-126,Red wine,Gamay Noir,2
-127,Red wine,Garnacha,4
-128,Red wine,Graciano,4
-129,Red wine,Grenache,10
-130,Red wine,Jaen,8
-131,Red wine,Kékfrankos,1
-132,Red wine,Lagrein,2
-133,Red wine,Malbec,166
-134,Red wine,Malvasia Nera,4
-135,Red wine,Marsanne,1
-136,Red wine,Mazuelo,3
-137,Red wine,Mencia,7
-138,Red wine,Merlot,128
-139,Red wine,Molinara,1
-140,Red wine,Monastrell,5
-141,Red wine,Montepulciano,22
-142,Red wine,Morellino,1
-143,Red wine,Mourvedre,4
-144,Red wine,Muscardin,1
-145,Red wine,Nebbiolo,57
-146,Red wine,Negroamaro,11
-147,Red wine,Nerello Cappuccio,1
-148,Red wine,Nerello Mascalese,14
-149,Red wine,Nero d'Avola,48
-150,Red wine,Nero di Troia,5
-151,Red wine,Oseleta,2
-152,Red wine,Petit Verdot,10
-153,Red wine,Petite Sirah,2
-154,Red wine,Pinot Nero,10
-155,Red wine,Pinot Noir,137
-156,Red wine,Pinotage,9
-157,Red wine,PinotageCoastal ,2
-158,Red wine,Primitivo,31
-159,Red wine,Pugnitello,2
-160,Red wine,Refosco,3
-161,Red wine,Refosco dal Peduncolo rosso,3
-162,Red wine,Rondinella,9
-163,Red wine,Rufete,3
-164,Red wine,Sangiovese,149
-165,Red wine,Shiraz/Syrah,255
-166,Red wine,Souzao,1
-167,Red wine,Spätburgunder,4
-168,Red wine,Susumaniello,3
-169,Red wine,Tannat,12
-170,Red wine,Tempranillo,64
-171,Red wine,Teroldego,7
-172,Red wine,Tinta Barroca,2
-173,Red wine,Tinta Roriz,14
-174,Red wine,Tinta de toro,7
-175,Red wine,Tinta del Pais,1
-176,Red wine,Tinto Cao,3
-177,Red wine,Touriga Franca,9
-178,Red wine,Touriga Nacional,106
-179,Red wine,Trincadeira,3
-180,Red wine,Uva di Troia,2
-181,Red wine,WineryArboleda,2
-182,Red wine,WineryCartuxa,1
-183,Red wine,WineryCastellargo,1
-184,Red wine,WineryChâteau Roquetaillade La Grange,2
-185,Red wine,WineryMingorra,2
-186,Red wine,WineryMonte Das Tres Anas,1
-187,Red wine,WineryValdorella,3
-188,Red wine,WineryViapiana,1
-189,Red wine,Zinfandel,13
-190,White wine, Airen,3
-191,White wine, Alfrocheiro Preto,1
-192,White wine, Alvarinho,9
-193,White wine, Ansonica,3
-194,White wine, Antão Vaz,20
-195,White wine, Aragonez,1
-196,White wine, Arinto de Bucelas,13
-197,White wine, Avesso,5
-198,White wine, Azal,3
-199,White wine, Bical,31
-200,White wine, Castelao,1
-201,White wine, Catarratto Bianco,3
-202,White wine, Cerceal Branco,2
-203,White wine, Chardonnay,7
-204,White wine, Chenin Blanc,1
-205,White wine, Codega de Larinho,12
-206,White wine, Colombard,4
-207,White wine, Cortese,2
-208,White wine, Encruzado,5
-209,White wine, Fernao Pires,11
-210,White wine, Friulano,1
-211,White wine, Garganega,1
-212,White wine, Gewürztraminer,2
-213,White wine, Gouveio,9
-214,White wine, Grechetto,2
-215,White wine, Grenache Blanc,5
-216,White wine, Inzolia,4
-217,White wine, Loureiro,2
-218,White wine, Macabeo,6
-219,White wine, Malvasia,2
-220,White wine, Malvasia Fina,3
-221,White wine, Maria Gomes,3
-222,White wine, Marsanne,4
-223,White wine, Melon de Bourgogne,1
-224,White wine, Moscatel Galego,2
-225,White wine, Moscatel de Setúbal,1
-226,White wine, Moscato,1
-227,White wine, Muscat Blanc,2
-228,White wine, Muscatel,1
-229,White wine, Perrum,4
-230,White wine, Picolit,3
-231,White wine, Pinot Grigio,6
-232,White wine, Pinot Gris,2
-233,White wine, Rabigato,15
-234,White wine, Rabo de Ovelha,2
-235,White wine, Riesling,8
-236,White wine, Rollo,2
-237,White wine, Roupeiro,9
-238,White wine, Roussanne,3
-239,White wine, Sauvignon Blanc,8
-240,White wine, Sylvaner,2
-241,White wine, Sémillon,8
-242,White wine, Síria,5
-243,White wine, Tocai Friulano,1
-244,White wine, Torrontés,1
-245,White wine, Trajadura,1
-246,White wine, Traminer,2
-247,White wine, Trincadeira das Pratas,1
-248,White wine, Ugni blanc,2
-249,White wine, Verdelho,9
-250,White wine, Viognier,19
-251,White wine, Viosinho,26
-252,White wine,Airen,2
-253,White wine,Albariño,17
-254,White wine,Alvarinho,17
-255,White wine,Antão Vaz,1
-256,White wine,Arinto de Bucelas,64
-257,White wine,Arneis,4
-258,White wine,Assyrtiko,2
-259,White wine,Bical,4
-260,White wine,Chardonnay,176
-261,White wine,Chenin Blanc,14
-262,White wine,Codega de Larinho,4
-263,White wine,Colombard,2
-264,White wine,Cortese,7
-265,White wine,Dona Branca,1
-266,White wine,Encruzado,6
-267,White wine,Fiano,1
-268,White wine,Friulano,8
-269,White wine,Furmint,5
-270,White wine,Garganega,1
-271,White wine,Gewürztraminer,35
-272,White wine,Gouveio,10
-273,White wine,Grecanico,2
-274,White wine,Greco,1
-275,White wine,Grenache,1
-276,White wine,Grenache Blanc,1
-277,White wine,Grillo,28
-278,White wine,Kerner,1
-279,White wine,Loureiro,2
-280,White wine,Malvasia,7
-281,White wine,Malvasia Fina,3
-282,White wine,Melon,1
-283,White wine,Moscatel de Alejandría,1
-284,White wine,Moscatel de Setúbal,1
-285,White wine,Moscato,5
-286,White wine,Moscato Giallo,1
-287,White wine,Müller-Thurgau,27
-288,White wine,Nascetta,1
-289,White wine,Nero d'Avola,3
-290,White wine,Pecorino,5
-291,White wine,Pinot Blanc,4
-292,White wine,Pinot Grigio,8
-293,White wine,Pinot Gris,2
-294,White wine,Piquepoul Blanc,2
-295,White wine,Procanico,2
-296,White wine,Rabigato,8
-297,White wine,Rabo de Ovelha,2
-298,White wine,Ribolla Gialla,6
-299,White wine,Riesling,56
-300,White wine,Rivaner,1
-301,White wine,Roupeiro,2
-302,White wine,Roussanne,3
-303,White wine,Sauvignon Blanc,158
-304,White wine,Sauvignon BlancCoastal ,3
-305,White wine,Sauvignon Gris,2
-306,White wine,Shiraz/Syrah,2
-307,White wine,Sylvaner,2
-308,White wine,Sémillon,2
-309,White wine,Torrontés,9
-310,White wine,Trajadura,4
-311,White wine,Trebbiano D'Abruzzo,4
-312,White wine,Verdejo,8
-313,White wine,Verdelho,6
-314,White wine,Verdicchio,2
-315,White wine,Vermentino,13
-316,White wine,Vernaccia di San Gimignano,6
-317,White wine,Viognier,17
-318,White wine,Viosinho,1
-319,White wine,Vitovska,1
-320,White wine,Viura,1
-321,White wine,WineryCheval Noir,27
-322,White wine,WineryMonte Seis Reis,1
+0,Red wine,Agiorgitiko,2
+1,Red wine,Aglianico,17
+2,Red wine,Alfrocheiro Preto,20
+3,Red wine,Alicante Bouschet,56
+4,Red wine,Ancellotta,2
+5,Red wine,Antão Vaz,2
+6,Red wine,Aragonez,41
+7,Red wine,Arinarnoa,2
+8,Red wine,Arinto de Bucelas,2
+9,Red wine,Baga,10
+10,Red wine,Barbera,28
+11,Red wine,Bastardo Magarachsky,3
+12,Red wine,Bonarda,12
+13,Red wine,Bovale,1
+14,Red wine,Cabernet Franc,113
+15,Red wine,Cabernet Sauvignon,452
+16,Red wine,Canaiolo Blanco,3
+17,Red wine,Canaiolo Nero,21
+18,Red wine,Cannonau,1
+19,Red wine,Carignan,47
+20,Red wine,Cariñena,2
+21,Red wine,Carménère,86
+22,Red wine,Castelao,40
+23,Red wine,Ciliegiolo,3
+24,Red wine,Cinsault,15
+25,Red wine,Cinsaut,3
+26,Red wine,Colorino del Valdarno,5
+27,Red wine,Corvina,43
+28,Red wine,Corvina Veronese,7
+29,Red wine,Corvinone,28
+30,Red wine,Counoise,1
+31,Red wine,Croatina,4
+32,Red wine,Côt,1
+33,Red wine,Dolcetto,11
+34,Red wine,Donzelinho Tinto,1
+35,Red wine,Forsellina,2
+36,Red wine,Frappato,1
+37,Red wine,Furmint,1
+38,Red wine,Gamay,9
+39,Red wine,Gamay Noir,2
+40,Red wine,Garnacha,14
+41,Red wine,Garnacha Peluda,1
+42,Red wine,Garnacha Tinta,4
+43,Red wine,Graciano,12
+44,Red wine,Grand Noir,1
+45,Red wine,Grenache,71
+46,Red wine,Grenache Blanc,1
+47,Red wine,Jaen,11
+48,Red wine,Kékfrankos,1
+49,Red wine,Lagrein,2
+50,Red wine,Malbec,212
+51,Red wine,Malvasia,3
+52,Red wine,Malvasia Nera,10
+53,Red wine,Mammolo,1
+54,Red wine,Mandón,1
+55,Red wine,Marsanne,2
+56,Red wine,Mayolet,1
+57,Red wine,Mazuelo,11
+58,Red wine,Mencia,7
+59,Red wine,Merlot,267
+60,Red wine,Molinara,16
+61,Red wine,Monastrell,11
+62,Red wine,Montepulciano,29
+63,Red wine,Morellino,1
+64,Red wine,Moreto,3
+65,Red wine,Mourvedre,36
+66,Red wine,Muscardin,2
+67,Red wine,Nebbiolo,57
+68,Red wine,Negroamaro,13
+69,Red wine,Nerello Cappuccio,8
+70,Red wine,Nerello Mascalese,18
+71,Red wine,Nero d'Avola,50
+72,Red wine,Nero di Troia,7
+73,Red wine,Nocera,3
+74,Red wine,Oseleta,20
+75,Red wine,Pais,1
+76,Red wine,Petit Verdot,66
+77,Red wine,Petite Sirah,4
+78,Red wine,Picardan,1
+79,Red wine,Piedirosso,11
+80,Red wine,Pinot Nero,10
+81,Red wine,Pinot Noir,148
+82,Red wine,Pinotage,12
+83,Red wine,PinotageCoastal,2
+84,Red wine,Poulsard,1
+85,Red wine,Primitivo,35
+86,Red wine,Pugnitello,2
+87,Red wine,Raboso Piave,2
+88,Red wine,Raboso Veronese,1
+89,Red wine,Refosco,3
+90,Red wine,Refosco dal Peduncolo rosso,3
+91,Red wine,Rondinella,46
+92,Red wine,Roussanne,2
+93,Red wine,Rufete,9
+94,Red wine,Sangiovese,207
+95,Red wine,Shiraz/Syrah,295
+96,Red wine,Souzao,10
+97,Red wine,Spätburgunder,4
+98,Red wine,Susumaniello,6
+99,Red wine,Tannat,19
+100,Red wine,Tempranillo,108
+101,Red wine,Teroldego,7
+102,Red wine,Tinta Amarela,13
+103,Red wine,Tinta Barroca,39
+104,Red wine,Tinta Caiada,2
+105,Red wine,Tinta Cão,4
+106,Red wine,Tinta Francisca,2
+107,Red wine,Tinta Roriz,109
+108,Red wine,Tinta de toro,11
+109,Red wine,Tinta del Pais,1
+110,Red wine,Tinto Cao,14
+111,Red wine,Tinto Fino,1
+112,Red wine,Tintore Di Tramonti,1
+113,Red wine,Touriga Franca,125
+114,Red wine,Touriga Francesa,5
+115,Red wine,Touriga Nacional,173
+116,Red wine,Trincadeira,29
+117,Red wine,Trousseau,1
+118,Red wine,Uva di Troia,4
+119,Red wine,Vaccareze,1
+120,Red wine,Vespolina,2
+121,Red wine,Viognier,2
+122,Red wine,Viura,5
+123,Red wine,WineryArboleda,2
+124,Red wine,WineryCartuxa,1
+125,Red wine,WineryCastellargo,1
+126,Red wine,WineryChâteau Roquetaillade La Grange,2
+127,Red wine,WineryMingorra,2
+128,Red wine,WineryMonte Das Tres Anas,1
+129,Red wine,WineryValdorella,3
+130,Red wine,WineryViapiana,1
+131,Red wine,Zinfandel,15
+132,White wine,Airen,5
+133,White wine,Albariño,17
+134,White wine,Alfrocheiro Preto,1
+135,White wine,Alvarinho,26
+136,White wine,Ansonica,3
+137,White wine,Antão Vaz,21
+138,White wine,Aragonez,1
+139,White wine,Arinto de Bucelas,77
+140,White wine,Arneis,4
+141,White wine,Assyrtiko,2
+142,White wine,Avesso,5
+143,White wine,Azal,3
+144,White wine,Bical,35
+145,White wine,Castelao,1
+146,White wine,Catarratto Bianco,3
+147,White wine,Cerceal Branco,2
+148,White wine,Chardonnay,183
+149,White wine,Chenin Blanc,15
+150,White wine,Codega de Larinho,16
+151,White wine,Colombard,6
+152,White wine,Cortese,9
+153,White wine,Dona Branca,1
+154,White wine,Encruzado,11
+155,White wine,Fernao Pires,11
+156,White wine,Fiano,1
+157,White wine,Friulano,9
+158,White wine,Furmint,5
+159,White wine,Garganega,2
+160,White wine,Gewürztraminer,37
+161,White wine,Gouveio,19
+162,White wine,Grecanico,2
+163,White wine,Grechetto,2
+164,White wine,Greco,1
+165,White wine,Grenache,1
+166,White wine,Grenache Blanc,6
+167,White wine,Grillo,28
+168,White wine,Inzolia,4
+169,White wine,Kerner,1
+170,White wine,Loureiro,4
+171,White wine,Macabeo,6
+172,White wine,Malvasia,9
+173,White wine,Malvasia Fina,6
+174,White wine,Maria Gomes,3
+175,White wine,Marsanne,4
+176,White wine,Melon,1
+177,White wine,Melon de Bourgogne,1
+178,White wine,Moscatel Galego,2
+179,White wine,Moscatel de Alejandría,1
+180,White wine,Moscatel de Setúbal,2
+181,White wine,Moscato,6
+182,White wine,Moscato Giallo,1
+183,White wine,Muscat Blanc,2
+184,White wine,Muscatel,1
+185,White wine,Müller-Thurgau,27
+186,White wine,Nascetta,1
+187,White wine,Nero d'Avola,3
+188,White wine,Pecorino,5
+189,White wine,Perrum,4
+190,White wine,Picolit,3
+191,White wine,Pinot Blanc,4
+192,White wine,Pinot Grigio,14
+193,White wine,Pinot Gris,4
+194,White wine,Piquepoul Blanc,2
+195,White wine,Procanico,2
+196,White wine,Rabigato,23
+197,White wine,Rabo de Ovelha,4
+198,White wine,Ribolla Gialla,6
+199,White wine,Riesling,64
+200,White wine,Rivaner,1
+201,White wine,Rollo,2
+202,White wine,Roupeiro,11
+203,White wine,Roussanne,6
+204,White wine,Sauvignon Blanc,166
+205,White wine,Sauvignon BlancCoastal,3
+206,White wine,Sauvignon Gris,2
+207,White wine,Shiraz/Syrah,2
+208,White wine,Sylvaner,4
+209,White wine,Sémillon,10
+210,White wine,Síria,5
+211,White wine,Tocai Friulano,1
+212,White wine,Torrontés,10
+213,White wine,Trajadura,5
+214,White wine,Traminer,2
+215,White wine,Trebbiano D'Abruzzo,4
+216,White wine,Trincadeira das Pratas,1
+217,White wine,Ugni blanc,2
+218,White wine,Verdejo,8
+219,White wine,Verdelho,15
+220,White wine,Verdicchio,2
+221,White wine,Vermentino,13
+222,White wine,Vernaccia di San Gimignano,6
+223,White wine,Viognier,36
+224,White wine,Viosinho,27
+225,White wine,Vitovska,1
+226,White wine,Viura,1
+227,White wine,WineryCheval Noir,27
+228,White wine,WineryMonte Seis Reis,1

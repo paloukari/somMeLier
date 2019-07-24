@@ -11,7 +11,7 @@ var chart = d3.select("#chart")
   .append("g")
   .attr("transform", "translate("+ 0 + "," + height/2 +")")
 
-var radiusScale = d3.scaleSqrt().domain([0,1250]).range([3,40])
+var radiusScale = d3.scaleSqrt().domain([0,1100]).range([3,50])
 
 var simulation = d3.forceSimulation()
   .force("x", d3.forceX(width/2).strength(.02))
@@ -21,14 +21,15 @@ var simulation = d3.forceSimulation()
             })
         );
 
-reds=d3.scaleLinear().domain([0,189]).range(["#801B4D","#CC2016"])
-whites=d3.scaleLinear().domain([190,322]).range(["#43C6AC","#F8FFAE"])
+reds=d3.scaleLinear().domain([0,132]).range(["#801B4D","#CC2016"])
+whites=d3.scaleLinear().domain([132,229]).range(["#43C6AC","#F8FFAE"])
 
 d3.queue()
   .defer(d3.csv, "data/grapes_db.csv")
   .await(ready)
 
 function ready(error, datapoints){
+  console.log(datapoints)
   var circs = chart.selectAll(".artist")
     .data(datapoints)
     .enter()
@@ -44,13 +45,31 @@ function ready(error, datapoints){
               return whites(d.id);
             }}
            })
+    .on("mouseover", function(d,i){
+      hoverText.text(d.Grape+": "+d.Count);
+      hoverGroup.attr("x",i);
+      hoverGroup.attr("y",i);
+      hoverGroup.style("visibility","visible");
+    })
+    .on("mouseout", function(d,i){
+      hoverGroup.style("visibility","hidden");
+    })
 
+var hoverGroup=chart.append("g").style("visibility","hidden");
+
+hoverGroup.append("rect")
+          .attr("id","id")
+          .attr("x",0)
+          .attr("y",0)
+          .attr("width",200)
+          .attr("height",40)
+          .attr("fill","rgb(255, 255, 255)")
+          .attr("stroke-width","1px")
+          .attr("stroke","white");
+
+var hoverText = hoverGroup.append("text").attr("x",7).attr("y",15);
    simulation.nodes(datapoints)
     .on("tick", ticked)
-    .on("mouseover",function(d, i) {
-      hoverText.text(d.Grape,": ",d.Count);
-      hoverGroup.style("visibility","visible")
-})
 
   function ticked(){
     circs
@@ -59,19 +78,3 @@ function ready(error, datapoints){
     })
   }
 }
-
-//setting the houver group
-var hoverGroup = chart.append("g").style("visibility","hidden");
-
-     hoverGroup.append("rect")
-     .attr("id","steps")
-     .attr("x",0)
-     .attr("y",0)
-     .attr("width",50)
-     .attr("height",20)
-     .attr("fill","rgb(255, 122, 182)")
-     .attr("stroke-width","1px")
-     .attr("stroke","gray");
-
-//setting the hover text
-var hoverText = hoverGroup.append("text").attr("x",7).attr("y",15);
