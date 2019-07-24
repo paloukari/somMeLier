@@ -10,14 +10,16 @@ wine_viz_lib.choropleth = function() {
     .select("div#choropleth")
     .append("svg")
     .attr("width", width)
-    .attr("height", height);;
+    .attr("height", height)
+    .style("display", "block");
 
   var svg2 = d3
     .select("div#choropleth")
     .append("svg")
-    .attr("width", 380)
+    .attr("width", 280)
     .attr("height", 350)
-    .style("float", "left");
+    .style("display", "inline-block")
+    .style("padding-left", "5px");
 
   var add_graph = function(country_name) {
     var rel_data = [];
@@ -33,11 +35,13 @@ wine_viz_lib.choropleth = function() {
       .append("svg")
       .attr("id", "curr_graph")
       .attr("width", 500)
-      .attr("height", 320);
+      .attr("height", 360)
+      .style("float", "right")
+      .style("padding-right", "5px");
 
     var width = 230;
     var height = 230;
-    var padding = 40;
+    var padding = 60;
 
     svg
       .append("rect")
@@ -136,9 +140,9 @@ wine_viz_lib.choropleth = function() {
       .append("text")
       .data(rel_data)
       .attr("y", 10)
-      .attr("x", 160)
+      .attr("x", 0)
       .attr("dy", "1em")
-      .style("text-anchor", "middle")
+      .style("text-anchor", "left")
       .style("font-weight", "bold")
       .text(function(d){ console.log(d); return d.country + " Wine Rating vs. Price" });
 
@@ -153,7 +157,7 @@ wine_viz_lib.choropleth = function() {
 
     svg
       .append("text")
-      .attr("y", 284)
+      .attr("y", 304)
       .attr("x", 165)
       .attr("dy", "1em")
       .style("text-anchor", "middle")
@@ -279,8 +283,8 @@ wine_viz_lib.choropleth = function() {
 
   var add_legend = function() {
     var circle_attrs = [
-      { x_axis: 10, y_axis: 30, radius: 5, color: "#e41a1c", type: "Red Wine" },
-      { x_axis: 10, y_axis: 50, radius: 5, color: "#377eb8", type: "White Wine" }
+      { x_axis: 10, y_axis: 50, radius: 5, color: "#e41a1c", type: "Red Wine" },
+      { x_axis: 10, y_axis: 80, radius: 5, color: "#377eb8", type: "White Wine" }
     ];
 
     // Add legend circles
@@ -305,8 +309,8 @@ wine_viz_lib.choropleth = function() {
     // Add legend text
     var label_attrs = [
       { x_axis: 20, y_axis: 0, text: "Wine Types", fontweight: "bold" },
-      { x_axis: 20, y_axis: 20, text: "Red Wine", fontweight: "normal" },
-      { x_axis: 20, y_axis: 40, text: "White Wine", fontweight: "normal" }
+      { x_axis: 20, y_axis: 30, text: "Red Wine", fontweight: "normal" },
+      { x_axis: 20, y_axis: 60, text: "White Wine", fontweight: "normal" }
     ];
 
     svg2
