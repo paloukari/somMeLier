@@ -1,7 +1,7 @@
 var wine_viz_lib = wine_viz_lib || {};
 
 wine_viz_lib.choropleth = function() {
-  var width = 500;
+  var width = 700;
   var height = 350;
   var data = d3.map();
   var graph_data = [];
@@ -10,8 +10,7 @@ wine_viz_lib.choropleth = function() {
     .select("div#choropleth")
     .append("svg")
     .attr("width", width)
-    .attr("height", height)
-    .style("display", "block");
+    .attr("height", height);
 
   var svg2 = d3
     .select("div#choropleth")
@@ -20,149 +19,6 @@ wine_viz_lib.choropleth = function() {
     .attr("height", 350)
     .style("display", "inline-block")
     .style("padding-left", "5px");
-
-  var add_graph = function(country_name) {
-    var rel_data = [];
-    for (var i = 0; i < graph_data.length; i++) {
-      if (graph_data[i].country === country_name) {
-          rel_data.push(graph_data[i]);
-      }
-    }
-
-    d3.select("#curr_graph").remove();
-    var svg = d3
-      .select("div#choropleth")
-      .append("svg")
-      .attr("id", "curr_graph")
-      .attr("width", 500)
-      .attr("height", 360)
-      .style("float", "right")
-      .style("padding-right", "5px");
-
-    var width = 230;
-    var height = 230;
-    var padding = 60;
-
-    svg
-      .append("rect")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("x", padding)
-      .attr("y", padding);
-
-    var x = d3.scaleLinear().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
-
-    x.domain([
-      0,
-      d3.max(rel_data, function(d) {
-        var price = parseInt(d.price.split('$')[1].split('.')[0]);
-        return +price;
-      })
-    ]);
-    y.domain([
-      0,
-      d3.max(rel_data, function(d) {
-        return +d.rating;
-      })
-    ]);
-
-    var line = d3
-      .line()
-      .x(function(d) {
-        var price = parseInt(d.price.split('$')[1].split('.')[0]);
-        return padding + x(price);
-      })
-      .y(function(d) {
-        return padding + y(d.rating);
-      });
-
-    svg
-      .selectAll("path.pt")
-      .data(rel_data)
-      .enter()
-      .append("path")
-      .attr("class", "pt")
-      .attr("d", d3.symbol().type(d3.symbolCircle))
-      .attr("fill", function(d) {
-        if (d.types === "White wine") {
-          return "#377eb8";
-        } else {
-          return "#e41a1c";
-        }
-      })
-      .attr("transform", function(d) {
-        var price = parseInt(d.price.split('$')[1].split('.')[0]);
-        return ("translate(" + (padding + x(price)) + "," + (padding + y(d.rating)) + ")");
-      })
-      .on("mouseover", function(d, i) {
-        d3.select(this).attr("stroke-width", 3);
-
-        svg
-          .append("text")
-          .attr("id", "curr_toss_catch_stat")
-          .attr("x", function() {
-            var price = parseInt(d.price.split('$')[1].split('.')[0]);
-            return padding + x(price) + 6;
-          })
-          .attr("y", function() {
-            return padding + y(d.rating) - 2;
-          })
-          .style("font-size", 18)
-          .style("font-weight", "bold")
-          .text(function() {
-            return d.name;
-          });
-      })
-      .on("mouseout", function(d, i) {
-        d3.select(this).attr("stroke-width", 1);
-        d3.select("#curr_toss_catch_stat").remove();
-      });
-
-    // Add axes
-    var xAxis = d3.axisBottom(x).ticks(9);
-    var yAxis = d3.axisLeft(y);
-    svg
-      .append("g")
-      .attr("transform", function() {
-        return "translate(" + padding + "," + (height + padding) + ")";
-      })
-      .call(xAxis);
-    svg
-      .append("g")
-      .attr("transform", function() {
-        return "translate(" + padding + "," + padding + ")";
-      })
-      .call(yAxis);
-
-    // Add axes labels
-    svg
-      .append("text")
-      .data(rel_data)
-      .attr("y", 10)
-      .attr("x", 0)
-      .attr("dy", "1em")
-      .style("text-anchor", "left")
-      .style("font-weight", "bold")
-      .text(function(d){ console.log(d); return d.country + " Wine Rating vs. Price" });
-
-    svg
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -3)
-      .attr("x", -155)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Rating");
-
-    svg
-      .append("text")
-      .attr("y", 304)
-      .attr("x", 165)
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Price (USD)");
-  };
 
   var add_highlight = function(d) {
     svg2
@@ -191,7 +47,7 @@ wine_viz_lib.choropleth = function() {
       .attr("y", 240)
       .style("font-size", 14)
       .text(function() {
-        return "Rating: " + d.obj.rating;
+        return "Highest Wine Rating: " + d.obj.rating;
       });
     svg2
       .append("text")
@@ -201,7 +57,7 @@ wine_viz_lib.choropleth = function() {
       .style("font-size", 14)
       .text(function() {
         var price = parseInt(d.obj.price.split('$')[1].split('.')[0]);
-        return "Price: $" + price;
+        return "Best Wine Price: $" + price;
       });
     svg2
       .append("text")
@@ -210,7 +66,7 @@ wine_viz_lib.choropleth = function() {
       .attr("y", 300)
       .style("font-size", 14)
       .style("font-style", "italic")
-      .text("Click to learn more.");
+      .text("Click to add country filter.");
   };
 
   var add_choropleth = function() {
@@ -223,10 +79,10 @@ wine_viz_lib.choropleth = function() {
 
     // Data and color scale
     var whiteColorScale = d3.scaleThreshold()
-      .domain([0, 3.5, 4, 4.5, 5])
+      .domain([0, 3.5, 4, 4.4, 5])
       .range(d3.schemeBlues[5]);
     var redColorScale = d3.scaleThreshold()
-      .domain([0, 3.5, 4, 4.5, 5])
+      .domain([0, 3.5, 4, 4.4, 5])
       .range(d3.schemeReds[5]);
 
     // Load external data and boot
@@ -266,7 +122,11 @@ wine_viz_lib.choropleth = function() {
           }
         })
         .on("click", function(d, i) {
-          add_graph(d.properties.name);
+          console.log("Clicked Country: " + d.properties.name);
+          country_ul = d3.select("div#country_chosen").selectAll("ul.chosen-choices");
+          country_li = country_ul.append("li").attr("class", "search-choice")
+          country_li.append("span").text(d.properties.name);
+          country_li.append("a").attr("class", "search-choice-close")
         })
         .on("mouseover", function(d, i) {
           add_highlight(d);
