@@ -126,11 +126,7 @@ wine_viz_lib.choropleth = function () {
           }
         })
         .on("click", function (d, i) {
-          //console.log("Clicked Country: " + d.properties.name);
-          country_ul = d3.select("div#country_chosen").selectAll("ul.chosen-choices");
-          country_li = country_ul.append("li").attr("class", "search-choice")
-          country_li.append("span").text(d.properties.name);
-          country_li.append("a").attr("class", "search-choice-close")
+          $('.chosen-select').val(d.properties.name).trigger('chosen:updated');
         })
         .on("mouseover", function (d, i) {
           add_highlight(d);
