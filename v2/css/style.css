@@ -43,8 +43,8 @@ h1, text {
   display: grid;
   grid-template-areas: 
   'header header header header header header header'
-  'filters map map map price price price ' 
-  'filters grapes grapes grapes keywords keywords keywords' 
+  'filters map map map keywords keywords keywords' 
+  'filters grapes grapes grapes price price price '
   'filters results results results results results results';
   grid-gap: 10px;
   background-color: #2196F3;
@@ -174,11 +174,11 @@ input[type=submit] {
   fill: #fff;
 }
 
-#chart {
+#keywordsVis {
   position: relative;
 }
 
-#chart path {
+#keywordsVis path {
   stroke: #fff;
 }
 
