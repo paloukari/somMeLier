@@ -1,3 +1,4 @@
+// prototyping overloading
 Array.prototype.contains = function (v) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] === v) return true;
@@ -19,24 +20,76 @@ jQuery.fn.visible = function () {
     return this.css('visibility', 'visible');
 };
 
+// Global Variables
 var allData = [];
 var filteredData = [];
-
 var countries = [];
 var words = [];
 
+
+
+// Filtering 
 function refresh() {
     if (allData === null || allData.length == 0)
         d3.csv('data/database.csv', initializeOptions);
 }
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+function preprocessData(data) {
+    data = data.map(a => function (a) {
+        a.keywords = a.review.split(/(\s+)/).map(
+            function (e) {
+                //remove punctuation 
+                return e.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
+            }).filter(
+                // remove small words
+                function (e) {
+                    return e.trim().length > 4 && isNaN(e.trim()) && !["rated", "ratings", "comment", "reviews", "community", "comments"].contains(e.trim())
+                }
+            )
+        //.filter( onlyUnique );
+
+        return a
+    }(a))
+
+    words = data.map(a => a.keywords)
+    words = words.flat()
+    var wordFreqs = words.reduce((p, c) => {
+        var name = c;
+        if (!p.hasOwnProperty(name)) {
+            p[name] = 0;
+        }
+        p[name]++;
+        return p;
+    }, {})
+
+    var filtered = Object.keys(wordFreqs).reduce(function (filtered, key) {
+        if (wordFreqs[key] > 100) filtered[key] = wordFreqs[key];
+        return filtered;
+    }, {});
+    words = Object.keys(filtered);
+
+    data = data.map(a => function (a) {
+        a.keywords = a.keywords.filter(value => -1 !== words.indexOf(value))
+        return a
+    }(a))
+
+    return { rawData: data, keywords: words };
+}
 
 
-function initializeOptions(error, data) {
-    allData = data;
-    filteredData = data;
+function updateUI(allData, filteredData) {
+
+    // autocomplete keywords
+    updateSunburst(filteredData, allData.keywords);
+}
+
+function initForm(data) {
+
     // autocomplete country
-    countries = data.map(a => a.country).unique();
+    countries = data.rawData.map(a => a.country).unique();
 
     var country = document.getElementById("country");
     country.options = countries.map(function (c) {
@@ -47,28 +100,22 @@ function initializeOptions(error, data) {
     })
 
 
-    // autocomplete keywords
-    words = data.map(
-        a => a.review.split(/(\s+)/).map(
-            function (e) {
-                //remove punctuation 
-                return e.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
-            }
-        ).filter(
-            // remove small words
-            function (e) { return e.trim().length > 3; }
-        )
-    )
-    words = words.flat()
-    words = words.unique();
-
     var keywords = document.getElementById("keywords");
-    keywords.options = words.map(function (c) {
+    keywords.options = data.keywords.map(function (c) {
         var option = document.createElement("option");
         option.text = c;
         option.value = c;
         keywords.appendChild(option);
     })
+
+}
+function initializeOptions(error, data) {
+
+    allData = preprocessData(data);
+    filteredData = allData.rawData;
+
+    // init form
+    initForm(allData)
 
     $('.chosen-select').chosen({}).trigger("chosen:updated");
     $('.chosen-select').visible()
@@ -93,5 +140,9 @@ function initializeOptions(error, data) {
             return true;
         });
 
+        updateUI(allData, filteredData)
+
     });
+
+    updateUI(allData, filteredData);
 }

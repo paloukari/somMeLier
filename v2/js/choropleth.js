@@ -1,7 +1,7 @@
 var wine_viz_lib = wine_viz_lib || {};
 
 wine_viz_lib.choropleth = function() {
-  var width = 700;
+  var width = 500;
   var height = 350;
   var data = d3.map();
   var graph_data = [];
