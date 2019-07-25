@@ -46,9 +46,7 @@ h1, text {
 
 .grid-container>div {
   background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+  /* font-size: 30px; */
 }
 
 /* Style inputs */
@@ -180,10 +178,10 @@ input[type=submit] {
 }
 
 #explanation {
+  float: right;
   position: absolute;
-  top: 260px;
-  left: 305px;
-  width: 140px;
+  top: 220px;
+  width: 600px;
   text-align: center;
   color: #666;
   z-index: -1;

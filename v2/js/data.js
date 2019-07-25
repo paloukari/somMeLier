@@ -16,9 +16,26 @@ Array.prototype.unique = function () {
     return arr;
 }
 
+String.prototype.hashCode = function () {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    hash = hash%16000000;
+    return Math.abs(hash).toString(16);
+};
+
+
 jQuery.fn.visible = function () {
     return this.css('visibility', 'visible');
 };
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
 // Global Variables
 var allData = [];
@@ -26,17 +43,20 @@ var filteredData = [];
 var countries = [];
 var words = [];
 
-
-
 // Filtering 
-function refresh() {
+function init() {
+
+    $(".reset").click(function () {
+        $('.chosen-select').val('').trigger('chosen:updated');
+        filteredData = allData.rawData;
+        updateUI();
+    });
+
     if (allData === null || allData.length == 0)
         d3.csv('data/database.csv', initializeOptions);
 }
 
-function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-}
+
 function preprocessData(data) {
     data = data.map(a => function (a) {
         a.keywords = a.review.split(/(\s+)/).map(
@@ -80,8 +100,7 @@ function preprocessData(data) {
 }
 
 
-function updateUI(allData, filteredData) {
-
+function updateUI() {
     // autocomplete keywords
     updateSunburst(filteredData, allData.keywords);
 }
@@ -126,14 +145,14 @@ function initializeOptions(error, data) {
         });
         selectedKeywords = Array.from(document.getElementById("keywords").selectedOptions).map(function (e) { return e.value; });
 
-        filteredData = allData.filter(function (e) {
+        filteredData = allData.rawData.filter(function (e) {
             if (selectedCountries != null && selectedCountries.length > 0) {
                 if (!selectedCountries.includes(e.country))
                     return false;
             }
 
             if (selectedKeywords != null && selectedKeywords.length > 0) {
-                if (!selectedKeywords.some(function (v) { return e.review.toLowerCase().indexOf(v) >= 0; })) {
+                if (!selectedKeywords.every(function (v) { return e.review.toLowerCase().indexOf(v) >= 0; })) {
                     return false;
                 }
             }

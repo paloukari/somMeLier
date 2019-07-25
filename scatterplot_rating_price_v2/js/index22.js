@@ -62,8 +62,8 @@ d3.csv("data/result.csv", function(error, data) {
   data = data.filter(function(d){return d.price > min_price;})
   data = data.filter(function(d){return d.price < max_price;})
   data = data.filter(function(d){return d.rating > ratings;})
-  console.log(ratings)
-  console.log(min_price)
+  // console.log(ratings)
+  // console.log(min_price)
   // if(ratings>0){
   //   data = data.filter(function(d){return d.rating > ratings;})
   //   // console.log(d)

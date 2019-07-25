@@ -29,7 +29,7 @@ d3.queue()
   .await(ready)
 
 function ready(error, datapoints){
-  console.log(datapoints)
+  //console.log(datapoints)
   var circs = chart.selectAll(".artist")
     .data(datapoints)
     .enter()

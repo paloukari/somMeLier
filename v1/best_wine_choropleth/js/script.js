@@ -262,7 +262,7 @@ wine_viz_lib.choropleth = function() {
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .style("font-weight", "bold")
-      .text(function(d){ console.log(d); return d.country + " Wine Rating vs. Price" });
+      .text(function(d){ return d.country + " Wine Rating vs. Price" });
 
     svg
       .append("text")

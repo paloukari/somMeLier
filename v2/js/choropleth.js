@@ -1,6 +1,6 @@
 var wine_viz_lib = wine_viz_lib || {};
 
-wine_viz_lib.choropleth = function() {
+wine_viz_lib.choropleth = function () {
   var width = 700;
   var height = 350;
   var data = d3.map();
@@ -20,7 +20,7 @@ wine_viz_lib.choropleth = function() {
     .style("display", "inline-block")
     .style("padding-left", "5px");
 
-  var add_highlight = function(d) {
+  var add_highlight = function (d) {
     svg2
       .append("text")
       .attr("id", "curr_country_name")
@@ -28,7 +28,7 @@ wine_viz_lib.choropleth = function() {
       .attr("y", 200)
       .style("font-size", 18)
       .style("font-weight", "bold")
-      .text(function() {
+      .text(function () {
         return d.properties.name;
       });
     svg2
@@ -37,7 +37,7 @@ wine_viz_lib.choropleth = function() {
       .attr("x", 0)
       .attr("y", 220)
       .style("font-size", 14)
-      .text(function() {
+      .text(function () {
         return "Type: " + d.obj.grape;
       });
     svg2
@@ -46,7 +46,7 @@ wine_viz_lib.choropleth = function() {
       .attr("x", 0)
       .attr("y", 240)
       .style("font-size", 14)
-      .text(function() {
+      .text(function () {
         return "Highest Wine Rating: " + d.obj.rating;
       });
     svg2
@@ -55,9 +55,13 @@ wine_viz_lib.choropleth = function() {
       .attr("x", 0)
       .attr("y", 260)
       .style("font-size", 14)
-      .text(function() {
-        var price = parseInt(d.obj.price.split('$')[1].split('.')[0]);
-        return "Best Wine Price: $" + price;
+      .text(function () {
+        if (d.obj.price) {
+          var price = parseInt(d.obj.price.split('$')[1].split('.')[0]);
+          return "Best Wine Price: $" + price;
+        }
+        else
+          return "No price for this selection";
       });
     svg2
       .append("text")
@@ -69,12 +73,12 @@ wine_viz_lib.choropleth = function() {
       .text("Click to add country filter.");
   };
 
-  var add_choropleth = function() {
+  var add_choropleth = function () {
     // Map and projection
     var path = d3.geoPath();
     var projection = d3.geoMercator()
       .scale(100)
-      .center([0,20])
+      .center([0, 20])
       .translate([width / 2, height / 2]);
 
     // Data and color scale
@@ -88,14 +92,14 @@ wine_viz_lib.choropleth = function() {
     // Load external data and boot
     d3.queue()
       .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-      .defer(d3.csv, 'data/database.csv', function(d) {
-        if (d.country != "" && d.rating != ""){
+      .defer(d3.csv, 'data/database.csv', function (d) {
+        if (d.country != "" && d.rating != "") {
           if (d.country === "United States") {
             d.country = "USA"
           }
-          var curr = data.get(d.country) || {"rating": 0, "type": "White wine"};
+          var curr = data.get(d.country) || { "rating": 0, "type": "White wine" };
           if (+d.rating > +curr.rating) {
-            data.set(d.country, {"rating": +d.rating, "type": d.types, "grape": d.grapes, "price": d.price, "name": d.name});
+            data.set(d.country, { "rating": +d.rating, "type": d.types, "grape": d.grapes, "price": d.price, "name": d.name });
           }
           graph_data.push(d);
         }
@@ -113,7 +117,7 @@ wine_viz_lib.choropleth = function() {
         .attr("d", d3.geoPath().projection(projection))
         // set the color of each country
         .attr("fill", function (d) {
-          d.obj = data.get(d.properties.name) || {"rating": 0, "type": "White wine"};
+          d.obj = data.get(d.properties.name) || { "rating": 0, "type": "White wine" };
 
           if (d.obj.type === "White wine") {
             return whiteColorScale(d.obj.rating);
@@ -121,27 +125,27 @@ wine_viz_lib.choropleth = function() {
             return redColorScale(d.obj.rating);
           }
         })
-        .on("click", function(d, i) {
-          console.log("Clicked Country: " + d.properties.name);
+        .on("click", function (d, i) {
+          //console.log("Clicked Country: " + d.properties.name);
           country_ul = d3.select("div#country_chosen").selectAll("ul.chosen-choices");
           country_li = country_ul.append("li").attr("class", "search-choice")
           country_li.append("span").text(d.properties.name);
           country_li.append("a").attr("class", "search-choice-close")
         })
-        .on("mouseover", function(d, i) {
+        .on("mouseover", function (d, i) {
           add_highlight(d);
         })
-        .on("mouseout", function(d, i) {
+        .on("mouseout", function (d, i) {
           d3.select("#curr_country_name").remove();
           d3.select("#curr_country_grape").remove();
           d3.select("#curr_country_rating").remove();
           d3.select("#curr_country_price").remove();
           d3.select("#curr_country_action").remove();
         });
-      }
+    }
   };
 
-  var add_legend = function() {
+  var add_legend = function () {
     var circle_attrs = [
       { x_axis: 10, y_axis: 50, radius: 5, color: "#e41a1c", type: "Red Wine" },
       { x_axis: 10, y_axis: 80, radius: 5, color: "#377eb8", type: "White Wine" }
@@ -153,16 +157,16 @@ wine_viz_lib.choropleth = function() {
       .data(circle_attrs)
       .enter()
       .append("circle")
-      .attr("cx", function(d) {
+      .attr("cx", function (d) {
         return d.x_axis;
       })
-      .attr("cy", function(d) {
+      .attr("cy", function (d) {
         return d.y_axis;
       })
-      .attr("r", function(d) {
+      .attr("r", function (d) {
         return d.radius;
       })
-      .style("fill", function(d) {
+      .style("fill", function (d) {
         return d.color;
       });
 
@@ -178,18 +182,18 @@ wine_viz_lib.choropleth = function() {
       .data(label_attrs)
       .enter()
       .append("text")
-      .attr("y", function(d) {
+      .attr("y", function (d) {
         return d.y_axis;
       })
-      .attr("x", function(d) {
+      .attr("x", function (d) {
         return d.x_axis;
       })
       .attr("dy", "1em")
-      .style("font-weight", function(d) {
+      .style("font-weight", function (d) {
         return d.fontweight;
       })
       .style("left", "0px")
-      .text(function(d) {
+      .text(function (d) {
         return d.text;
       });
   };
