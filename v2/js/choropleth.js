@@ -143,8 +143,8 @@ wine_viz_lib.choropleth = function () {
 
   var add_legend = function () {
     var circle_attrs = [
-      { x_axis: 10, y_axis: 50, radius: 5, color: "#e41a1c", type: "Red Wine" },
-      { x_axis: 10, y_axis: 80, radius: 5, color: "#377eb8", type: "White Wine" }
+      { x_axis: 10, y_axis: 40, radius: 5, color: "#e41a1c", type: "Red Wine" },
+      { x_axis: 10, y_axis: 70, radius: 5, color: "#377eb8", type: "White Wine" }
     ];
 
     // Add legend circles
