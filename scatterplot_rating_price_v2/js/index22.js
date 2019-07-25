@@ -38,9 +38,9 @@ var box = d3.select("#chart").append("box")
 
 var min_price = 100
 var max_price = 100000
+var ratings = 0
 
-
-function draw(min_price,max_price){
+function draw(min_price,max_price,ratings){
 // load data
 d3.csv("data/result.csv", function(error, data) {
 
@@ -61,6 +61,15 @@ d3.csv("data/result.csv", function(error, data) {
 
   data = data.filter(function(d){return d.price > min_price;})
   data = data.filter(function(d){return d.price < max_price;})
+  data = data.filter(function(d){return d.rating > ratings;})
+  console.log(ratings)
+  console.log(min_price)
+  // if(ratings>0){
+  //   data = data.filter(function(d){return d.rating > ratings;})
+  //   // console.log(d)
+  //   }
+    
+
 
 
   // don't want dots overlapping axis, so add in buffer to data domain
@@ -134,11 +143,6 @@ d3.csv("data/result.csv", function(error, data) {
      .on("click",function(d){
           window.open(d.url, '_blank')});
 
-});
-}
-
-draw(0,10000)
-
 // This function is to make the slider work
 function getVals(){
   // Get slider values
@@ -152,10 +156,13 @@ function getVals(){
   var displayElement = parent.getElementsByClassName("rangeValues")[0];
       displayElement.innerHTML = slide1 + " - " + slide2
       svg.selectAll("*").remove()
-      draw(slide1,slide2);
+      svg.selectAll("*").transition().duration(3000)
+      draw(slide1,slide2,ratings);
       // filtering
-      data = data.filter(function(d){return d.price > slide1;})
-      data = data.filter(function(d){return d.price < slide2;})
+      // data = data.filter(function(d){return d.price > slide1;})
+      // data = data.filter(function(d){return d.price < slide2;})
+      max_price = slide2
+      min_price = slide1
 
   
 }
@@ -175,3 +182,17 @@ window.onload = function(){
       }
 }
 
+//function to get the changes in the rating filter
+const buttons = d3.selectAll('#rating');
+buttons.on('change', function(d) {
+ratings = this.value/10
+svg.selectAll("*").remove()
+svg.selectAll("*").transition().duration(3000)
+draw(min_price,max_price,ratings)
+console.log(ratings)
+});
+
+});
+}
+
+draw(0,10000,0)
