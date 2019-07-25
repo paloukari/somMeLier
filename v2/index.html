@@ -3,7 +3,7 @@
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
-  <script src="js/data.js"></script>
+
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
   <link rel="stylesheet" href="css/style.css">
 
@@ -16,55 +16,22 @@
   <script src='https://d3js.org/d3-selection-multi.v0.4.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
-
-
-  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js'></script>
-  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src='https://d3js.org/d3-shape.v1.min.js'></script>
-  comm <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script> comm
-  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-
-  <script src="https://d3js.org/d3-array.v1.min.js"></script>
-  <script src="https://d3js.org/d3-geo.v1.min.js"></script>
-
-  comm <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script> comm
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <script src="js/data.js"></script> -->
-
 </head>
 
 <body>
 
   <h1>somMeLier</h1>
   <div class="grid-container">
-    <div class="header">Header</div>
-    <div class="filters">Filters
-      <form class="form-inline" autocomplete="off" style="width:120px;">
-        <div>
-          <select id="country" name="country" data-placeholder="Choose a Countries..." class="chosen-select" multiple>
-          </select>
-        </div>
-        <div>
-          <select id="grape" data-placeholder="Select grapes" name="grape" class="chosen-select" multiple>
-          </select>
-        </div>
-        <div>
-          <select id="price" data-placeholder="Select price" name="price" class="chosen-select" multiple>
-          </select>
-        </div>
-        <div>
-          <select id="keywords" data-placeholder="Select review keywords" name="keywords" class="chosen-select"
-            multiple>
-          </select>
-        </div>
-        <div>
-          <button type="button" class="reset">Clear</button>
-        </div>
-      </form>
+    <div class="filters" autocomplete="off">Filters
+      <select id="country" name="country" data-placeholder="Choose a Countries..." class="chosen-select" multiple>
+      </select>
+      <select id="grape" data-placeholder="Select grapes" name="grape" class="chosen-select" multiple>
+      </select>
+      <select id="price" data-placeholder="Select price" name="price" class="chosen-select" multiple>
+      </select>
+      <select id="keywords" data-placeholder="Select review keywords" name="keywords" class="chosen-select" multiple>
+      </select>
+      <button type="button" class="reset">Clear</button>
     </div>
 
     <!–– Adds Wine Choropleth -->
@@ -81,15 +48,12 @@
         <div id="keywordsVis">
           <div id="explanation" style="visibility: hidden;">
             <span id="percentage"></span><br />
-            of visits begin with this sequence of pages
+            of wine reviews have these keywords
           </div>
         </div>
       </div>
+
       <div class="results">Results</div>
-
-
-      <div id="vis"></div>
-
   </div>
 
   <p>This is the v2.0 of the MIDS W209 Summer 2019 group project by:</p>
@@ -97,6 +61,7 @@
 
 </body>
 
+<script src="js/data.js"></script>
 <script src="js/sequences.js"></script>
 <script src="js/choropleth.js"></script>
 <script src="js/grapes.js"></script>

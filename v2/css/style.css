@@ -11,10 +11,6 @@ h1, text {
   font-family: sans-serif;
 }
 
-.header {
-  grid-area: header;
-}
-
 .filters {
   grid-area: filters;
 }
@@ -42,13 +38,10 @@ h1, text {
 .grid-container {
   display: grid;
   grid-template-areas: 
-  'header header header header header header header'
-  'filters map map map keywords keywords keywords' 
-  'filters grapes grapes grapes price price price '
-  'filters results results results results results results';
-  grid-gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+  'filters filters'
+  'map keywords' 
+  'grapes price '
+  'results results';
 }
 
 .grid-container>div {
@@ -146,8 +139,12 @@ input[type=submit] {
 
 .chosen-select{
   visibility: hidden;
+  
 }
 
+.filters{
+  width: 180px
+}
 
 
 #keywordsMain {
