@@ -57,7 +57,7 @@ wine_viz_lib.choropleth = function () {
       .style("font-size", 14)
       .text(function () {
         if (d.obj.price) {
-          var price = parseInt(d.obj.price.split('$')[1].split('.')[0]);
+          var price = parseInt(d.obj.price.split('$')[1].split('.')[0])/4;
           return "Best Wine Price: $" + price;
         }
         else

@@ -1,7 +1,7 @@
 // Setting the params for margin 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 480 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    width = 550 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
 
 // setup x 
 var xValue = function(d) { return d.price;}, // data -> value
@@ -39,8 +39,10 @@ var box = d3.select("div#price").append("box")
 var min_price = 100
 var max_price = 100000
 var ratings = 0
+var selectedCountries = null
+var selectedGrapes = null
 
-function draw(min_price,max_price,ratings){
+function draw(min_price,max_price,ratings,selectedCountries,selectedGrapes){
 // load data
 d3.csv("data/result.csv", function(error, data) {
 
@@ -51,6 +53,7 @@ d3.csv("data/result.csv", function(error, data) {
     d.rating = +d.rating;
     d.name = d.name;
     d.region = d.region;
+    d.country = d.country;
     d.grapes = d.grapes;
     d.food = d.food;
     d.winery = d.winery;
@@ -58,18 +61,30 @@ d3.csv("data/result.csv", function(error, data) {
 //    console.log(d);
   });
 
-
+  // filtering price
   data = data.filter(function(d){return d.price > min_price;})
   data = data.filter(function(d){return d.price < max_price;})
-  data = data.filter(function(d){return d.rating >= ratings;})
-  console.log(ratings)
-  console.log(min_price)
-  // if(ratings>0){
-  //   data = data.filter(function(d){return d.rating > ratings;})
-  //   // console.log(d)
-  //   }
-    
 
+  // filtering rating
+  data = data.filter(function(d){return d.rating >= ratings;})
+
+  // filtering country
+  data = data.filter(function (e) {
+          if (selectedCountries != null && selectedCountries.length > 0) {
+              if (!selectedCountries.includes(e.country))
+                  return false;
+          }
+          return true;
+      });
+
+  //filtering grapes    
+  data = data.filter(function (e) {
+          if (selectedGrapes != null && selectedGrapes.length > 0) {
+              if (!selectedGrapes.includes(e.grapes))
+                  return false;
+          }
+          return true;
+      });
 
 
   // don't want dots overlapping axis, so add in buffer to data domain
@@ -157,12 +172,13 @@ function getVals(){
       displayElement.innerHTML = slide1 + " - " + slide2
       svg.selectAll("*").remove()
       svg.selectAll("*").transition().duration(3000)
-      draw(slide1,slide2,ratings);
+      draw(slide1,slide2,ratings,selectedCountries,selectedGrapes);
       // filtering
       // data = data.filter(function(d){return d.price > slide1;})
       // data = data.filter(function(d){return d.price < slide2;})
       max_price = slide2
       min_price = slide1
+      console.log(max_price)
 
   
 }
@@ -188,9 +204,32 @@ buttons.on('change', function(d) {
 ratings = this.value/10
 svg.selectAll("*").remove()
 svg.selectAll("*").transition().duration(3000)
-draw(min_price,max_price,ratings)
+draw(min_price,max_price,ratings,selectedCountries,selectedGrapes)
 console.log(ratings)
 });
+
+//function to get the changes in the country and grapes filter
+$(".chosen-select").chosen({}).change(function (e, c) {
+        // filtering country
+        selectedCountries = Array.from(document.getElementById("country").selectedOptions).map(function (e) {
+            return e.value;
+        });
+        svg.selectAll("*").remove()
+        svg.selectAll("*").transition().duration(3000)
+        draw(min_price,max_price,ratings,selectedCountries,selectedGrapes)
+        
+        // filtering grapes
+        selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function (e) {
+            return e.value;
+        });
+        svg.selectAll("*").remove()
+        svg.selectAll("*").transition().duration(3000)
+        draw(min_price,max_price,ratings,selectedCountries,selectedGrapes)
+
+    });
+
+
+
 
 });
 }
