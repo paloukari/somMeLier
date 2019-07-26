@@ -173,9 +173,7 @@ function getVals(){
       svg.selectAll("*").remove()
       svg.selectAll("*").transition().duration(3000)
       draw(slide1,slide2,ratings,selectedCountries,selectedGrapes);
-      // filtering
-      // data = data.filter(function(d){return d.price > slide1;})
-      // data = data.filter(function(d){return d.price < slide2;})
+      
       max_price = slide2
       min_price = slide1
       console.log(max_price)
