@@ -181,20 +181,40 @@ function getVals(){
   
 }
 
-window.onload = function(){
-  // Initialize Sliders
+const sliders2 = d3.selectAll('#slidess');
+sliders2.on('change', function(d) 
+{
   var sliderSections = document.getElementsByClassName("range-slider");
-      for( var x = 0; x < sliderSections.length; x++ ){
-        var sliders = sliderSections[x].getElementsByTagName("input");
-        for( var y = 0; y < sliders.length; y++ ){
-          if( sliders[y].type ==="range" ){
-            sliders[y].oninput = getVals;
-            // Manually trigger event first time to display values
-            sliders[y].oninput();
+        for( var x = 0; x < sliderSections.length; x++ )
+          {
+            var sliders = sliderSections[x].getElementsByTagName("input");
+            for( var y = 0; y < sliders.length; y++ )
+              {
+                if( sliders[y].type ==="range" )
+                  {
+                    sliders[y].oninput = getVals;
+                    // Manually trigger event first time to display values
+                    sliders[y].oninput();
+                  }
+              }
           }
-        }
-      }
-}
+  console.log(sliderSections)
+});
+
+// window.onload = function(){
+//   // Initialize Sliders
+//   var sliderSections = document.getElementsByClassName("range-slider");
+//       for( var x = 0; x < sliderSections.length; x++ ){
+//         var sliders = sliderSections[x].getElementById("slidess");
+//         for( var y = 0; y < sliders.length; y++ ){
+//           if( sliders[y].type ==="range" ){
+//             sliders[y].oninput = getVals;
+//             // Manually trigger event first time to display values
+//             sliders[y].oninput();
+//           }
+//         }
+//       }
+// }
 
 //function to get the changes in the rating filter
 const buttons = d3.selectAll('#rating');

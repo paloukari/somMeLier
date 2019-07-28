@@ -24,6 +24,7 @@ var simulation = d3.forceSimulation()
 reds=d3.scaleLinear().domain([0,132]).range(["#801B4D","#CC2016"])
 whites=d3.scaleLinear().domain([132,229]).range(["#43C6AC","#F8FFAE"])
 
+
 d3.queue()
   .defer(d3.csv, "static/data/grapes_db.csv")
   .await(ready)
@@ -78,3 +79,68 @@ var hoverText = hoverGroup.append("text").attr("x",7).attr("y",15).style("font-s
     })
   }
 }
+
+// This function is to make the slider work
+function getVals(){
+  // Get slider values
+  var parent = this.parentNode;
+  var slides = parent.getElementsByTagName("input");
+    var slide1 = parseFloat( slides[0].value );
+    var slide2 = parseFloat( slides[1].value );
+  // Neither slider will clip the other, so make sure we determine which is larger
+  if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+  
+  var displayElement = parent.getElementsByClassName("rangeValues")[0];
+      displayElement.innerHTML = slide1 + " - " + slide2
+      
+      max_price = slide2
+      min_price = slide1
+      console.log(min_price)
+      console.log(max_price)
+
+  
+}
+
+const sliders2 = d3.selectAll('#slidess');
+sliders2.on('change', function(d) 
+{
+  var sliderSections = document.getElementsByClassName("range-slider");
+        for( var x = 0; x < sliderSections.length; x++ )
+          {
+            var sliders = sliderSections[x].getElementsByTagName("input");
+            for( var y = 0; y < sliders.length; y++ )
+              {
+                if( sliders[y].type ==="range" )
+                  {
+                    sliders[y].oninput = getVals;
+                    // Manually trigger event first time to display values
+                    sliders[y].oninput();
+                  }
+              }
+          }
+  console.log(sliderSections)
+});
+
+
+//function to get the changes in the rating filter
+const buttons = d3.selectAll('#rating');
+buttons.on('change', function(d) {
+ratings = this.value/10
+console.log(ratings)
+});
+
+//function to get the changes in the country and grapes filter
+$(".chosen-select").chosen({}).change(function (e, c) {
+      // filtering country
+      selectedCountries = Array.from(document.getElementById("country").selectedOptions).map(function (e) {
+          return e.value;
+      });
+      console.log(selectedCountries)
+      
+      // filtering grapes
+      selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function (e) {
+          return e.value;
+      });
+      console.log(selectedGrapes)
+
+  });
