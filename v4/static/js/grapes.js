@@ -21,16 +21,16 @@ var simulation = d3.forceSimulation()
             })
         );
 
-reds=d3.scaleLinear().domain([0,132]).range(["#801B4D","#CC2016"])
-whites=d3.scaleLinear().domain([132,229]).range(["#43C6AC","#F8FFAE"])
+reds=d3.scaleLinear().domain([0,131]).range(["#BD1E1E","#940940"])
+whites=d3.scaleLinear().domain([132,228]).range(["#E9EB8A","#79CF4E"])
 
 
 d3.queue()
-  .defer(d3.csv, "static/data/grapes_db.csv")
+  .defer(d3.csv, "getData")
   .await(ready)
 
 function ready(error, datapoints){
-  //console.log(datapoints)
+  console.log(datapoints)
   var circs = chart.selectAll(".artist")
     .data(datapoints)
     .enter()
@@ -48,8 +48,8 @@ function ready(error, datapoints){
            })
     .on("mouseover", function(d,i){
       hoverText.text(d.Grape+": "+d.Count);
-      hoverGroup.attr("x",i);
-      hoverGroup.attr("y",i);
+      hoverGroup.attr("x",d.x);
+      hoverGroup.attr("y",d.y);
       hoverGroup.style("visibility","visible");
     })
     .on("mouseout", function(d,i){
