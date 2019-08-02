@@ -15,60 +15,83 @@ wine_viz_lib.choropleth = function () {
   var svg2 = d3
     .select("div#choropleth")
     .append("svg")
-    .attr("width", 280)
-    .attr("height", 250)
-    .style("display", "inline-block")
+    .attr("width", 650)
+    .attr("height", 125)
+    .style("float", "left")
     .style("padding-left", "5px");
 
   var add_highlight = function (d) {
     svg2
       .append("text")
       .attr("id", "curr_country_name")
-      .attr("x", 0)
-      .attr("y", 150)
+      .attr("x", 350)
+      .attr("y", 20)
       .style("font-size", 18)
+      .style("float", "right")
       .style("font-weight", "bold")
       .text(function () {
         return d.properties.name;
       });
     svg2
       .append("text")
-      .attr("id", "curr_country_grape")
-      .attr("x", 0)
-      .attr("y", 180)
+      .attr("id", "curr_country_wine")
+      .attr("x", 350)
+      .attr("y", 40)
       .style("font-size", 14)
+      .style("float", "right")
       .text(function () {
-        return "Type: " + d.obj.grape;
+        if (d.obj.name) {
+          return "Best Wine: " + d.obj.name;
+        }
+        return "No wine for this country."
+      });
+    svg2
+      .append("text")
+      .attr("id", "curr_country_grape")
+      .attr("x", 350)
+      .attr("y", 60)
+      .style("font-size", 14)
+      .style("float", "right")
+      .text(function () {
+        if (d.obj.grape) {
+          return "Type: " + d.obj.grape;
+        }
+        return "No grape for this country."
       });
     svg2
       .append("text")
       .attr("id", "curr_country_rating")
-      .attr("x", 0)
-      .attr("y", 200)
+      .attr("x", 350)
+      .attr("y", 80)
       .style("font-size", 14)
+      .style("float", "right")
       .text(function () {
-        return "Highest Wine Rating: " + d.obj.rating;
+        if (d.obj.price) {
+          return "Highest Wine Rating: " + d.obj.rating;
+       }
+       return "No rating for this country."
       });
     svg2
       .append("text")
       .attr("id", "curr_country_price")
-      .attr("x", 0)
-      .attr("y", 220)
+      .attr("x", 350)
+      .attr("y", 100)
       .style("font-size", 14)
+      .style("float", "right")
       .text(function () {
         if (d.obj.price) {
           var price = parseInt(d.obj.price.split('$')[1].split('.')[0])/4;
           return "Best Wine Price: $" + price;
         }
-        else
-          return "No price for this selection";
+        return "No price for this country.";
       });
     svg2
       .append("text")
       .attr("id", "curr_country_action")
-      .attr("x", 0)
-      .attr("y", 240)
+      .attr("x", 350)
+      .attr("y", 120)
       .style("font-size", 14)
+      .style("float", "right")
       .style("font-style", "italic")
       .text("Click to add country filter.");
   };
@@ -83,11 +106,11 @@ wine_viz_lib.choropleth = function () {
 
     // Data and color scale
     var whiteColorScale = d3.scaleThreshold()
-      .domain([0, 3.5, 4, 4.4, 5])
-      .range(d3.schemeBlues[5]);
+      .domain([0, 4, 4.4, 5])
+      .range(d3.schemeBlues[4]);
     var redColorScale = d3.scaleThreshold()
-      .domain([0, 3.5, 4, 4.4, 5])
-      .range(d3.schemeReds[5]);
+      .domain([0, 4, 4.4, 5])
+      .range(d3.schemeReds[4]);
 
     // Load external data and boot
     d3.queue()
@@ -137,14 +160,27 @@ wine_viz_lib.choropleth = function () {
           d3.select("#curr_country_rating").remove();
           d3.select("#curr_country_price").remove();
           d3.select("#curr_country_action").remove();
+          d3.select("#curr_country_wine").remove();
         });
     }
   };
 
   var add_legend = function () {
+    // Data and color scale
+    var whiteColorScale = d3.scaleThreshold()
+      .domain([0, 4, 4.4, 5])
+      .range(d3.schemeBlues[4]);
+    var redColorScale = d3.scaleThreshold()
+      .domain([0, 4, 4.4, 5])
+      .range(d3.schemeReds[4]);
+
     var circle_attrs = [
-      { x_axis: 10, y_axis: 40, radius: 5, color: "#e41a1c", type: "Red Wine"},
-      { x_axis: 10, y_axis: 70, radius: 5, color: "#377eb8", type: "White Wine" }
+      { x_axis: 110, y_axis: 40, radius: 7, color: "0", type: "Red Wine"},
+      { x_axis: 130, y_axis: 40, radius: 7, color: "4.1", type: "Red Wine"},
+      { x_axis: 150, y_axis: 40, radius: 7, color: "4.5", type: "Red Wine"},
+      { x_axis: 110, y_axis: 80, radius: 7, color: "0", type: "White Wine"},
+      { x_axis: 130, y_axis: 80, radius: 7, color: "4.1", type: "White Wine"},
+      { x_axis: 150, y_axis: 80, radius: 7, color: "4.5", type: "White Wine"}
     ];
 
     // Add legend circles
@@ -163,14 +199,21 @@ wine_viz_lib.choropleth = function () {
         return d.radius;
       })
       .style("fill", function (d) {
-        return d.color;
+        if (d.type == "White Wine") {
+          return whiteColorScale(d.color);
+        } else {
+          return redColorScale(d.color);
+        }
       });
 
     // Add legend text
     var label_attrs = [
-      { x_axis: 20, y_axis: 0, text: "Wine Types", fontweight: "bold" },
-      { x_axis: 20, y_axis: 30, text: "Red Wine", fontweight: "normal" },
-      { x_axis: 20, y_axis: 60, text: "White Wine", fontweight: "normal" }
+      { x_axis: 20, y_axis: 0, text: "Best Wine Rating", fontsize: 18, fontweight: "bold" },
+      { x_axis: 20, y_axis: 30, text: "Red Wine", fontsize: 14, fontweight: "normal" },
+      { x_axis: 20, y_axis: 70, text: "White Wine", fontsize: 12, fontweight: "normal" },
+      { x_axis: 106, y_axis: 50, text: "<4", fontsize: 12, fontweight: "normal" },
+      { x_axis: 126, y_axis: 50, text: ">4", fontsize: 12, fontweight: "normal" },
+      { x_axis: 142, y_axis: 50, text: ">4.5", fontsize: 12, fontweight: "normal" }
     ];
 
     svg2
@@ -187,6 +230,9 @@ wine_viz_lib.choropleth = function () {
       .attr("dy", "1em")
       .style("font-weight", function (d) {
         return d.fontweight;
+      })
+      .style("font-size", function(d) {
+        return d.fontsize;
       })
       .style("left", "0px")
       .text(function (d) {
