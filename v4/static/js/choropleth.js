@@ -106,11 +106,11 @@ wine_viz_lib.choropleth = function () {
 
     // Data and color scale
     var whiteColorScale = d3.scaleThreshold()
-      .domain([0, 4, 4.4, 5])
-      .range(d3.schemeBlues[4]);
+      .domain([0, 3, 4, 4.4, 5])
+      .range(d3.schemeBlues[5]);
     var redColorScale = d3.scaleThreshold()
       .domain([0, 4, 4.4, 5])
-      .range(d3.schemeReds[4]);
+      .range(d3.schemeReds[5]);
 
     // Load external data and boot
     d3.queue()
@@ -168,35 +168,38 @@ wine_viz_lib.choropleth = function () {
   var add_legend = function () {
     // Data and color scale
     var whiteColorScale = d3.scaleThreshold()
-      .domain([0, 4, 4.4, 5])
-      .range(d3.schemeBlues[4]);
+      .domain([0, 3, 4, 4.4, 5])
+      .range(d3.schemeBlues[5]);
     var redColorScale = d3.scaleThreshold()
       .domain([0, 4, 4.4, 5])
-      .range(d3.schemeReds[4]);
+      .range(d3.schemeReds[5]);
 
-    var circle_attrs = [
-      { x_axis: 110, y_axis: 40, radius: 7, color: "0", type: "Red Wine"},
-      { x_axis: 130, y_axis: 40, radius: 7, color: "4.1", type: "Red Wine"},
-      { x_axis: 150, y_axis: 40, radius: 7, color: "4.5", type: "Red Wine"},
-      { x_axis: 110, y_axis: 80, radius: 7, color: "0", type: "White Wine"},
-      { x_axis: 130, y_axis: 80, radius: 7, color: "4.1", type: "White Wine"},
-      { x_axis: 150, y_axis: 80, radius: 7, color: "4.5", type: "White Wine"}
+    var rect_attrs = [
+      { x_axis: 100, y_axis: 30, width: 40, height: 20, color: "0", type: "Red Wine"},
+      { x_axis: 140, y_axis: 30, width: 40, height: 20, color: "4.1", type: "Red Wine"},
+      { x_axis: 180, y_axis: 30, width: 40, height: 20, color: "4.5", type: "Red Wine"},
+      { x_axis: 100, y_axis: 70, width: 40, height: 20, color: "0", type: "White Wine"},
+      { x_axis: 140, y_axis: 70, width: 40, height: 20, color: "4.1", type: "White Wine"},
+      { x_axis: 180, y_axis: 70, width: 40, height: 20, color: "4.5", type: "White Wine"}
     ];
 
-    // Add legend circles
-    var circles = svg2
-      .selectAll("circle")
-      .data(circle_attrs)
+    // Add legend rectangles
+    var rects = svg2
+      .selectAll("rect")
+      .data(rect_attrs)
       .enter()
-      .append("circle")
-      .attr("cx", function (d) {
+      .append("rect")
+      .attr("x", function (d) {
         return d.x_axis;
       })
-      .attr("cy", function (d) {
+      .attr("y", function (d) {
         return d.y_axis;
       })
-      .attr("r", function (d) {
-        return d.radius;
+      .attr("width", function (d) {
+        return d.width;
+      })
+      .attr("height", function (d) {
+        return d.height;
       })
       .style("fill", function (d) {
         if (d.type == "White Wine") {
@@ -211,9 +214,9 @@ wine_viz_lib.choropleth = function () {
       { x_axis: 20, y_axis: 0, text: "Best Wine Rating", fontsize: 18, fontweight: "bold" },
       { x_axis: 20, y_axis: 30, text: "Red Wine", fontsize: 14, fontweight: "normal" },
       { x_axis: 20, y_axis: 70, text: "White Wine", fontsize: 12, fontweight: "normal" },
-      { x_axis: 106, y_axis: 50, text: "<4", fontsize: 12, fontweight: "normal" },
-      { x_axis: 126, y_axis: 50, text: ">4", fontsize: 12, fontweight: "normal" },
-      { x_axis: 142, y_axis: 50, text: ">4.5", fontsize: 12, fontweight: "normal" }
+      { x_axis: 110, y_axis: 50, text: "<4", fontsize: 12, fontweight: "normal" },
+      { x_axis: 143, y_axis: 50, text: "4 - 4.5", fontsize: 12, fontweight: "normal" },
+      { x_axis: 188, y_axis: 50, text: ">4.5", fontsize: 12, fontweight: "normal" }
     ];
 
     svg2
