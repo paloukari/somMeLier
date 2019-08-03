@@ -109,6 +109,7 @@ function initForm(data) {
 
     // autocomplete country
     countries = data.rawData.map(a => a.country).unique();
+    allGrapes = data.rawData.map(a => a.grapes).unique()
 
     var country = document.getElementById("country");
     country.options = countries.map(function (c) {
@@ -118,6 +119,14 @@ function initForm(data) {
         country.appendChild(option);
     })
 
+    var grapes = document.getElementById("grape");
+    
+    grapes.options = allGrapes.map(function (c) {
+        var option = document.createElement("option");
+        option.text = c;
+        option.value = c;
+        grapes.appendChild(option);
+    })
 
     var keywords = document.getElementById("keywords");
     keywords.options = data.keywords.map(function (c) {

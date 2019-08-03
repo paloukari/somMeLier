@@ -79,7 +79,7 @@ function addKeywords(from, elements) {
 
     return from.concat(newNodes)
 }
-function getTopKeywords(data, limit = 10) {
+function getTopKeywords(data, limit = 6) {
     words = data.map(a => a.keywords)
     words = words.flat()
     var wordFreqs = words.reduce((p, name) => {
@@ -203,7 +203,10 @@ function createVisualization(json) {
                 return wordColor(d.name);
             })
             .style("opacity", 1)
-            .on("mouseover", mouseover);
+            .on("mouseover", mouseover)
+            .on("click",function(d){
+                var country = document.getElementById("keywords");
+                console.log(d.name)});
 
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container").on("mouseleave", mouseleave);
@@ -333,7 +336,7 @@ function updateBreadcrumbs(nodeArray, percentageString) {
 
     // Set position for entering and updating nodes.
     g.attr("transform", function (d, i) {
-        console.log("transform: "+ d.name)
+        //console.log("transform: "+ d.name)
         return "translate(" + (i+1) * (b.w + b.s) + ", 0)";
     });
 
