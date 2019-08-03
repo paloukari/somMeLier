@@ -205,8 +205,9 @@ function createVisualization(json) {
             .style("opacity", 1)
             .on("mouseover", mouseover)
             .on("click",function(d){
-                var country = document.getElementById("keywords");
-                console.log(d.name)});
+                $('#keywords').val(d.name).trigger('chosen:updated');
+                $('#keywords').change();
+            });
 
     // Add the mouseleave handler to the bounding circle.
     d3.select("#container").on("mouseleave", mouseleave);

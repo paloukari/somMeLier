@@ -129,18 +129,18 @@ ratings = this.value/10
 console.log(ratings)
 });
 
-//function to get the changes in the country and grapes filter
-$(".chosen-select").chosen({}).change(function (e, c) {
-      // filtering country
-      selectedCountries = Array.from(document.getElementById("country").selectedOptions).map(function (e) {
-          return e.value;
-      });
-      console.log(selectedCountries)
+// //function to get the changes in the country and grapes filter
+// $(".chosen-select").chosen({}).change(function (e, c) {
+//       // filtering country
+//       selectedCountries = Array.from(document.getElementById("country").selectedOptions).map(function (e) {
+//           return e.value;
+//       });
+//       console.log(selectedCountries)
       
-      // filtering grapes
-      selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function (e) {
-          return e.value;
-      });
-      console.log(selectedGrapes)
+//       // filtering grapes
+//       selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function (e) {
+//           return e.value;
+//       });
+//       console.log(selectedGrapes)
 
-  });
+//   });

@@ -16,6 +16,10 @@ Array.prototype.unique = function () {
     return arr;
 }
 
+String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, "");
+  };
+
 String.prototype.hashCode = function () {
     var hash = 0, i, chr;
     if (this.length === 0) return hash;
@@ -109,7 +113,7 @@ function initForm(data) {
 
     // autocomplete country
     countries = data.rawData.map(a => a.country).unique();
-    allGrapes = data.rawData.map(a => a.grapes).unique()
+    allGrapes = data.rawData.map(a => a.grapes.trim()).unique()
 
     var country = document.getElementById("country");
     country.options = countries.map(function (c) {
