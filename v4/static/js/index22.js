@@ -1,5 +1,5 @@
 // Setting the params for margin 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
+var margin = {top: 20, right: 20, bottom: 60, left: 60},
     width = 550 - margin.left - margin.right,
     height = 350 - margin.top - margin.bottom;
 
@@ -14,7 +14,6 @@ var xValue = function(d) { return d.price;}, // data -> value
 var yValue = function(d) { return d.rating;}, // data -> value
     yScale = d3.scaleLinear().range([height, 0]), // value -> display
     yMap = function(d) { return yScale(yValue(d));}, // data -> display
-    // yAxis = d3.svg.axis().scale(yScale).orient("left");
     yAxis = d3.axisLeft(yScale);
     
 
@@ -58,6 +57,7 @@ d3.csv("static/data/result.csv", function(error, data) {
     d.food = d.food;
     d.winery = d.winery;
     d.url = d.url;
+    d.types = d.types;
 //    console.log(d);
   });
 
@@ -95,32 +95,64 @@ d3.csv("static/data/result.csv", function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("class", "label")
+      .call(xAxis);
+    
+  svg.append("text")
+      .attr("font-size", "18px")
+      .attr("transform", "translate(0," + height + ")")
       .attr("x", width)
-      .attr("y", -6)
+      .attr("y", 40)
       .style("text-anchor", "end")
-      .text("price");
+      .text("Price");
 
   // y-axis
   svg.append("g")
       .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("class", "label")
+      .call(yAxis);
+
+  svg.append("text")
+      .attr("font-size", "20px")
       .attr("transform", "rotate(-90)")
-      .attr("y", 6)
+      .attr("y", -45)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Rating");
+      .text("Ratings");
+
+  //add legends
+  svg.append("text")
+      .attr("font-size", "15px")
+      .attr("transform", "translate(0," + height + ")")
+      .attr("y", 40)
+      .attr("x", 10)
+      .style("text-anchor", "start")
+      .style("fill", '#B0C4DE')
+      .text("White Wine");
+
+  svg.append("text")
+      .attr("font-size", "15px")
+      .attr("transform", "translate(0," + height + ")")
+      .attr("y", 60)
+      .attr("x", 10)
+      .style("text-anchor", "start")
+      .style("fill", '#B22222')
+      .text("Red Wine");
 
   // draw dots
   svg.selectAll(".dot")
       .data(data)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 1.5)
+      .attr("r", 2.5)
+      .style("fill", function(d) {
+                                    if(d.types == 'White wine')
+                                      {
+                                        return '#B0C4DE' 
+                                      }
+                                    else
+                                      {
+                                        return '#B22222'  
+                                      }
+                                  } )
       .attr("cx", xMap)
       .attr("cy", yMap)
       .on("mouseover", function(d) {
@@ -137,6 +169,7 @@ d3.csv("static/data/result.csv", function(error, data) {
                box.html("<br>"+d.price+" USD" + "<br>" + 
                         d.rating + " Stars" +"<br>" +
                         d.name +"<br>" +
+                        d.types+"<br>"+
                         d.winery +"<br>"+
                         d.region +"<br>" +
                         d.grapes +"<br>" +
@@ -200,21 +233,6 @@ sliders2.on('change', function(d)
           }
   console.log(sliderSections)
 });
-
-// window.onload = function(){
-//   // Initialize Sliders
-//   var sliderSections = document.getElementsByClassName("range-slider");
-//       for( var x = 0; x < sliderSections.length; x++ ){
-//         var sliders = sliderSections[x].getElementById("slidess");
-//         for( var y = 0; y < sliders.length; y++ ){
-//           if( sliders[y].type ==="range" ){
-//             sliders[y].oninput = getVals;
-//             // Manually trigger event first time to display values
-//             sliders[y].oninput();
-//           }
-//         }
-//       }
-// }
 
 //function to get the changes in the rating filter
 const buttons = d3.selectAll('#rating');
