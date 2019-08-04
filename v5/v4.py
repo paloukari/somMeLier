@@ -12,16 +12,21 @@ def index():
 
 
 
-@app.route('/getData')
+@app.route('/getData/<int:min_price>/<int:max_price>/<int:rating>/<string:countries>/<string:grapes>')
 # def getData(min_price,max_price,countries,ratings):
-def getData():
-	# raw_data["price"]=[float((x.split('R$')[1])[:-1]) for x in raw_data.price]
-	# filtered_data=raw_data[raw_data.price>=min_price].copy()
-	# filtered_data=filtered_data[filtered_data<=max_price]
-	# filtered_data=filtered_data[filtered_data.country in countries]
+def getData(min_price,max_price,rating,countries,grapes):
+	filtered_data=raw_data.copy()
+	filtered_data["price"]=[float((x.split('R$')[1])[:-1]) for x in raw_data.price]
+	filtered_data=filtered_data[filtered_data.price>=min_price]
+	filtered_data=filtered_data[filtered_data.price<=max_price]
+	filtered_data=filtered_data[filtered_data.rating>=rating/10]
+	if countries=='all':
+		pass
+	else:
+		filtered_data=filtered_data[filtered_data.country.isin(countries.split(','))]
 	# filtered_data=filtered_data[filtered_data.rating>=ratings]
 
-	filtered_data=raw_data.copy()
+	# filtered_data=raw_data.copy()
 
 	filtered_data["grapes"]=[grape[1:].replace('\n','') if grape[0]==' ' else grape.replace('\n','') for grape in filtered_data.grapes]
 
@@ -44,4 +49,9 @@ def getData():
 	dt.reset_index(inplace=True)
 	dt.rename(columns={0:"Count"}, inplace=True)
 	dt.index.names=['id']
+	dt['flag']=0
+	if grapes=='all':
+		dt['flag']=0
+	else:
+		dt['flag']=[0 if x in grapes.split(',') else 1 for x in dt.Grape]
 	return dt.to_csv()
