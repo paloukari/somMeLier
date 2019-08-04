@@ -130,13 +130,13 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
                         if (d["flag"] === '0') {
                             return reds(d.id);
                         } else {
-                            return "#330000"
+                            return "#9C7C7D"
                         }
                     } else {
                         if (d["flag"] === '0') {
                             return whites(d.id);
                         } else {
-                            return "#042400"
+                            return "#768075"
                         }
                     }
                 }
@@ -179,7 +179,7 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
                 })
         }
     }
-    
+
 }
 
 genGrapes(0, 1000, 0, ['all'], ['all'])
