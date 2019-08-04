@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js'></script>
+  <script src='https://d3js.org/d3-shape.v1.min.js'></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.9.1/d3.min.js'></script>
+  <script src='https://d3js.org/d3-selection-multi.v0.4.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3-legend/1.1.0/d3-legend.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+</head>
+
+<body>
+
+<h1 style="text-align: center;"><span style="color: #993366;">somMeLier</span></h1>
+  <div class="grid-container" rowspan="5" style="background-color: #F3F3F3; vertical-align: text-top; text-align: left;width: 10px">
+    <div class="filters" autocomplete="off" style="font-size: 24px; font-weight: bold;">Filters
+      <select id="country" name="country" data-placeholder="Choose a Countries..." class="chosen-select" multiple>
+      </select>
+      <select id="grape" data-placeholder="Select grapes" name="grape" class="chosen-select" multiple>
+      </select>
+      <select id="keywords" data-placeholder="Select review keywords" name="keywords" class="chosen-select" multiple>
+      </select>
+
+      <!-- Adding slider for price -->
+      <!-- Price Range-->
+      <p style="width: 150px; font-size: 10px">Price Range (USD): </p>
+      <section class="range-slider" style="width: 150px">
+        <span class="rangeValues" style="width: 150px; font-size: 10px" > 0 - 250 </span>
+        <input id="slidess" value="0" min="0" max="250" step="10" type="range" style="width: 150px">
+        <input id="slidess" value="1200" min="0" max="250" step="10" type="range" style="width: 150px">
+      </section>
+
+      <!-- Adding ratio button for ratings -->
+      <!-- Rating-->
+      <p style="width: 150px; font-size: 10px">Rating:</p>
+        <input type="radio" name="drone" id="rating" value="45"> <span style="font-size: 10px"> 4.5 and Above</span><br>
+        <input type="radio" name="drone" id="rating" value="40">  <span style="font-size: 10px"> 4.0 and Above</span><br>
+        <input type="radio" name="drone" id="rating" value="35">  <span style="font-size: 10px"> 3.5 and Above</span><br>
+        <input type="radio" name="drone" id="rating" value="30">  <span style="font-size: 10px"> 3.0 and Above</span><br>
+        <input type="radio" name="drone" id="rating" value="0" checked>  <span style="font-size: 10px"> all</span><br>
+
+
+
+      <button type="button" class="reset" id ="reset">Clear</button>
+      <button type="button" id ="filteres">Update Filter</button>
+      <div id="baner"></div>
+    </div>
+
+    <!–– Adds Wine Choropleth -->
+      <div id="choropleth" class="map">
+        <h4 style="text-align: center">Discover the World's Best Wines by Country</h4>
+      </div>
+
+    <!–– Adds Scatterplot Price X Rating -->
+      <div id="price"  class="price">
+        <h4 style="text-align: center">Check the best Cost Benefit comparing Price X Rating</h4>
+      <p align="left" style="font-size: 10px">
+        <br>
+        <br>
+        To interact with the graph:<br>
+          * Mouse over: Show the informations of that particular wine
+          <br>
+          * Click: Open Vivino's page for more info.<br>
+      </p>
+      </div>
+
+    <!–– Adds Grapes Chart-->
+      <div id="chart" class="grapes">
+        <h4 style="text-align: center">Grapes</h4>
+      </div>
+
+      <div class="keywords" id="keywordsMain">
+        <h4 style="text-align: center">Explore the community review keywords</h4>
+        <div id="sequence"></div>
+        <div id="keywordsVis">
+          <div id="explanation" style="visibility: hidden;">
+            <span id="percentage"></span><br />
+            of the reviews
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="results">Results</div> -->
+  </div>
+
+  <p>This is the v3.0 of the MIDS W209 Summer 2019 group project by:</p>
+  <p>Arthur Lima, Brandon Castaing, Eduarda Espindola, Spyros Garyfallos</p>
+
+</body>
+
+<script src="static/js/data.js"></script>
+<script src="static/js/sequences.js"></script>
+<script src="static/js/choropleth.js"></script>
+<script src="static/js/grapes.js"></script>
+<script src="static/js/index22.js"></script>
+<!-- <script src="static/js/rere.js"></script> -->
+
+<script>
+  init()
+</script>
+
+</html>
