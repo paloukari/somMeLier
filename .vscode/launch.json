@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "v4/v4.py",
+                "FLASK_APP": "v5/v4.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },
@@ -20,7 +20,7 @@
                 "--no-reload"
             ],
             "jinja": true,
-            "cwd": "${workspaceFolder}/v4"
+            "cwd": "${workspaceFolder}/v5"
         },
         {
             "name": "Python: Current File",
