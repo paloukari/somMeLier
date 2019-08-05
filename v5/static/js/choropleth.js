@@ -149,7 +149,11 @@ wine_viz_lib.choropleth = function () {
           }
         })
         .on("click", function (d, i) {
-          $('.chosen-select').val(d.properties.name).trigger('chosen:updated');
+          if (d.properties.name === "USA") {
+            $('.chosen-select').val("United States").trigger('chosen:updated');
+          } else {
+            $('.chosen-select').val(d.properties.name).trigger('chosen:updated');
+          }
         })
         .on("mouseover", function (d, i) {
           add_highlight(d);
