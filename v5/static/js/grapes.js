@@ -82,19 +82,28 @@ $(".chosen-select").chosen({}).change(function(e, c) {
     countries = Array.from(document.getElementById("country").selectedOptions).map(function(e) {
         return e.value;
     });
-    console.log(countries)
     chart.selectAll("*").remove()
     chart.selectAll("*").transition().duration(3000)
-    if (countries.length > 0) {
-        genGrapes(0, 250, 0, countries, ['all'])
-    } else {
-        genGrapes(0, 250, 0, ['all'], ['all'])
-    };
     // filtering grapes
-    selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function(e) {
-        return e.value;
+    grapes = Array.from(document.getElementById("grape").selectedOptions).map(function(e) {
+        return e.value.replace('/','--');
     });
-    console.log(selectedGrapes)
+
+    if (countries.length>0 & grapes.length >0) {
+        genGrapes(0, 1000, 0, countries, grapes)
+    }
+    if (countries.length==0 & grapes.length >0) {
+        genGrapes(0, 1000, 0, ['all'], grapes)
+    }
+    if (countries.length>0 & grapes.length ==0) {
+        genGrapes(0, 1000, 0, countries, ['all'])
+    }
+
+    if (countries.length==0 & grapes.length ==0) {
+        genGrapes(0, 1000, 0, ['all'], ['all'])
+    }
+
+
 
 });
 
@@ -105,10 +114,48 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
         .await(ready)
 
     function ready(error, datapoints) {
-        reds = d3.scaleLinear().domain([0, 131]).range(["#BD1E1E", "#940940"])
-        whites = d3.scaleLinear().domain([132, 228]).range(["#E9EB8A", "#79CF4E"])
+        var minrd = d3.min(datapoints, function(d){
+            if(d["Type"]==='Red wine'){
+                return parseInt(d.id);
+            }
+            else{
+                return 1000;
+            }
+        })
+        var maxrd = d3.max(datapoints, function(d){
+            if(d["Type"]==='Red wine'){
+                return parseInt(d.id);
+            }
+            else{
+                return -10;
+            }
+        })
+        var minwt = d3.min(datapoints, function(d){
+            if(d["Type"]==='White wine'){
+                return parseInt(d.id);
+            }
+            else{
+                return 1000;
+            }
+        })
+        var maxwt = d3.max(datapoints, function(d){
+            if(d["Type"]==='White wine'){
+                return parseInt(d.id);
+            }
+            else{
+                return -10;
+            }
+        })
+        var minct = d3.min(datapoints, function(d){
+            return parseInt(d.Count);
+        })
+        var maxct = d3.max(datapoints, function(d){
+            return parseInt(d.Count);
+        })
+        reds = d3.scaleLinear().domain([minrd, maxrd]).range(["#BD1E1E", "#940940"])
+        whites = d3.scaleLinear().domain([minwt, maxwt]).range(["#E9EB8A", "#79CF4E"])
         var radiusScale = d3.scaleSqrt()
-                            .domain([0, 1100])
+                            .domain([0, maxct*3])
                             .range([3, 50])
         var simulation = d3.forceSimulation()
                            .force("x", d3.forceX(width / 2).strength(.02))
@@ -128,13 +175,13 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
                 "fill": function(d) {
                     if (d["Type"] === 'Red wine') {
                         if (d["flag"] === '0') {
-                            return reds(d.id);
+                            return reds(parseInt(d.id));
                         } else {
                             return "#9C7C7D"
                         }
                     } else {
                         if (d["flag"] === '0') {
-                            return whites(d.id);
+                            return whites(parseInt(d.id));
                         } else {
                             return "#768075"
                         }
@@ -149,6 +196,10 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
             })
             .on("mouseout", function(d, i) {
                 hoverGroup.style("visibility", "hidden");
+            })
+            .on("click",function(d){
+                $('#grape').val(d.Grape).trigger('chosen:updated');
+                $('#grape').change();
             })
 
         var hoverGroup = chart.append("g").style("visibility", "hidden");

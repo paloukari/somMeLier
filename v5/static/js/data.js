@@ -113,7 +113,7 @@ function initForm(data) {
 
     // autocomplete country
     countries = data.rawData.map(a => a.country).unique();
-    allGrapes = data.rawData.map(a => a.grapes.trim()).unique()
+    allGrapes = data.rawData.map(a => a.grapes.trim().split(', ')).flat().unique()
 
     var country = document.getElementById("country");
     country.options = countries.map(function (c) {
