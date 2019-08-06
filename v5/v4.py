@@ -61,5 +61,5 @@ def getData(min_price,max_price,rating,countries,grapes,words):
 	if grapes=='all':
 		dt['flag']=0
 	else:
-		dt['flag']=[0 if x in grapes.replace('--','/').split(',') else 1 for x in dt.Grape]
+		dt['flag']=[0 if x in grapes.replace('--','/').encode('utf8').split(',') else 1 for x in dt.Grape]
 	return dt.to_csv()
