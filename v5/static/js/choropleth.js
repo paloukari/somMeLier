@@ -151,8 +151,10 @@ wine_viz_lib.choropleth = function () {
         .on("click", function (d, i) {
           if (d.properties.name === "USA") {
             $('.chosen-select').val("United States").trigger('chosen:updated');
+            $('#country').change();
           } else {
             $('.chosen-select').val(d.properties.name).trigger('chosen:updated');
+            $('#country').change();
           }
         })
         .on("mouseover", function (d, i) {
