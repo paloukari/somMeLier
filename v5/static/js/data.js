@@ -169,7 +169,7 @@ function initializeOptions(error, data) {
             }
 
             if (selectedGrapes != null && selectedGrapes.length > 0) {
-                if (!selectedGrapes.includes(e.grapes))
+                if (!selectedGrapes.includes(e.grapes.trim()))
                     return false;
             }
 

@@ -10,8 +10,31 @@ var b = {
     w: 75, h: 30, s: 3, t: 10
 };
 
+// var l1Color = d3.scaleLinear().domain([1,100]).range(["black", "grey"])
+// var l2Color = d3.scaleLinear().domain([1,100]).range(["black", "grey"])
+// var l3Color = d3.scaleLinear().domain([1,100]).range(["black", "grey"])
+
+var l1Color = d3.scaleLinear().domain([1,100]).range(["black", "#69b3a2"])
+var l2Color = d3.scaleLinear().domain([1,100]).range(["black", "steelblue"])
+var l3Color = d3.scaleLinear().domain([1,100]).range(["black", "rgba(198, 45, 205, 0.5)"])
+
+var colors = [l1Color, l2Color, l3Color]
+
 function wordColor(word) {
     let color = '#' + String(word).hashCode();
+    return color;
+}
+
+function percentageColor(d) {
+    if(!d.parent)
+        return l1Color[0];
+    let colorScale = colors[d.depth - 1]
+    values = d.parent.children.map(c => function (c) {
+        return Number(c.value);
+    }(c));
+    max = Math.max(...values);
+    min = Math.min(...values);
+    let color = colorScale(100*(d.value-min)/(max-min));
     return color;
 }
 
@@ -28,10 +51,10 @@ var vis = d3.select("#keywordsVis").append("svg:svg")
 initializeBreadcrumbTrail();
 
 // Bounding circle underneath the sunburst, to make it easier to detect
-    // when the mouse leaves the parent g.
-    vis.append("svg:circle")
-        .attr("r", radius)
-        .style("opacity", 0);
+// when the mouse leaves the parent g.
+vis.append("svg:circle")
+    .attr("r", radius)
+    .style("opacity", 0);
 
 
 var partition = d3.layout.partition()
@@ -178,33 +201,37 @@ function buildHierarchy(data, majorKeywords) {
 function createVisualization(json) {
 
     // Basic setup of page elements.
-    
+
     // drawLegend();
     // d3.select("#togglelegend").on("click", toggleLegend);
 
 
 
-    
+
     // For efficiency, filter nodes to keep only those large enough to see.
     var nodes = partition.nodes(json)
         .filter(function (d) {
             return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
         });
+    if(nodes.length > 0)
+        totalSize = nodes[0].value
+    else
+        totalSize = 0
 
     var sunburst = vis.data([json]).selectAll(".sunburstPath").data(nodes);
-    var path =
-        sunburst.enter().append("svg:path")
+    if(totalSize > 0)
+        var path = sunburst.enter().append("svg:path")
             .attr("class", "sunburstPath")
             .merge(sunburst)
             .attr("display", function (d) { return d.depth ? null : "none"; })
             .attr("d", arc)
             .attr("fill-rule", "evenodd")
             .style("fill", function (d) {
-                return wordColor(d.name);
+                return percentageColor(d);
             })
             .style("opacity", 1)
             .on("mouseover", mouseover)
-            .on("click",function(d){
+            .on("click", function (d) {
                 $('#keywords').val(d.name).trigger('chosen:updated');
                 $('#keywords').change();
             });
@@ -213,10 +240,14 @@ function createVisualization(json) {
     d3.select("#container").on("mouseleave", mouseleave);
 
     // Get total size of the tree = value of root node from partition.
-    if (path.node())
-        totalSize = path.node().__data__.value;
-    else
-        totalSize = 0
+    if (totalSize == 0){
+        vis.style("visibility", "hidden");
+        d3.select("#explanation").text('No reviews found.').style("visibility", "");
+    }
+    else{
+        vis.style("visibility", "visible");
+        d3.select("#explanation").style("visibility", "hidden");
+    }
 };
 
 // Fade all but the current sequence, and show it in the breadcrumb trail.
@@ -323,7 +354,7 @@ function updateBreadcrumbs(nodeArray, percentageString) {
     entering.append("svg:polygon")
         .attr("points", breadcrumbPoints)
         .style("fill", function (d) {
-            return wordColor(d.name);
+            return percentageColor(d);
         });
 
     entering.append("svg:text")
@@ -331,14 +362,14 @@ function updateBreadcrumbs(nodeArray, percentageString) {
         .attr("y", b.h / 2)
         .attr("dy", "0.35em")
         .attr("text-anchor", "middle")
-        .text(function (d) { 
-            return d.name; 
+        .text(function (d) {
+            return d.name;
         });
 
     // Set position for entering and updating nodes.
     g.attr("transform", function (d, i) {
         //console.log("transform: "+ d.name)
-        return "translate(" + (i+1) * (b.w + b.s) + ", 0)";
+        return "translate(" + (i + 1) * (b.w + b.s) + ", 0)";
     });
 
     // Remove exiting nodes.
