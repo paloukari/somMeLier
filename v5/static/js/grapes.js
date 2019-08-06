@@ -6,6 +6,7 @@ var min_price = 0
 var max_price = 1000
 var rating = 0
 var grapes = ['all']
+var keywords= ['all']
 
 var chart = d3.select("div#chart")
     .append("svg")
@@ -68,6 +69,13 @@ sliders2.on('change', function(d) {
     console.log(sliderSections)
 });
 
+const buttons3 = d3.selectAll('#reset');
+buttons3.on('click', function(d) {
+    chart.selectAll("*").remove()
+    chart.selectAll("*").transition().duration(3000)
+    genGrapes(0, 1000, 0, ['all'], ['all'])
+    console.log("clear")
+});
 
 //function to get the changes in the rating filter
 const buttons = d3.selectAll('#rating');
@@ -89,28 +97,44 @@ $(".chosen-select").chosen({}).change(function(e, c) {
         return e.value.replace('/','--');
     });
 
-    if (countries.length>0 & grapes.length >0) {
-        genGrapes(0, 1000, 0, countries, grapes)
+    // filtering keywords
+    keywords = Array.from(document.getElementById("keywords").selectedOptions).map(function (e) { return e.value; });
+    console.log(countries,grapes,keywords)
+
+    if (countries.length>0 & grapes.length >0 & keywords.length>0) {
+        genGrapes(0, 1000, 0, countries, grapes, keywords)
     }
-    if (countries.length==0 & grapes.length >0) {
-        genGrapes(0, 1000, 0, ['all'], grapes)
+    if (countries.length==0 & grapes.length >0 & keywords.length>0) {
+        genGrapes(0, 1000, 0, ['all'], grapes, keywords)
     }
-    if (countries.length>0 & grapes.length ==0) {
-        genGrapes(0, 1000, 0, countries, ['all'])
+    if (countries.length>0 & grapes.length ==0 & keywords.length>0) {
+        genGrapes(0, 1000, 0, countries, ['all'], keywords)
     }
 
-    if (countries.length==0 & grapes.length ==0) {
-        genGrapes(0, 1000, 0, ['all'], ['all'])
+    if (countries.length==0 & grapes.length ==0 & keywords.length>0) {
+        genGrapes(0, 1000, 0, ['all'], ['all'], keywords)
+    }
+    if (countries.length==0 & grapes.length ==0 & keywords.length==0) {
+        genGrapes(0, 1000, 0, ['all'], ['all'], ['all'])
+    }
+    if (countries.length==0 & grapes.length >0 & keywords.length==0) {
+        genGrapes(0, 1000, 0, ['all'], grapes, ['all'])
+    }
+    if (countries.length>0 & grapes.length >0 & keywords.length==0) {
+        genGrapes(0, 1000, 0, countries, grapes, ['all'])
     }
 
+    if (countries.length>0 & grapes.length ==0 & keywords.length==0) {
+        genGrapes(0, 1000, 0, countries, ['all'], ['all'])
+    }
 
 
 });
 
 
-function genGrapes(min_price, max_price, rating, countries, grapes) {
+function genGrapes(min_price, max_price, rating, countries, grapes, keywords) {
     d3.queue()
-        .defer(d3.csv, "getData/" + min_price + '/' + max_price + '/' +rating+ '/' + countries + '/' + grapes)
+        .defer(d3.csv, "getData/" + min_price + '/' + max_price + '/' +rating+ '/' + countries + '/' + grapes + '/' + keywords)
         .await(ready)
 
     function ready(error, datapoints) {
@@ -233,4 +257,4 @@ function genGrapes(min_price, max_price, rating, countries, grapes) {
 
 }
 
-genGrapes(0, 1000, 0, ['all'], ['all'])
+genGrapes(0, 1000, 0, ['all'], ['all'], ['all'])

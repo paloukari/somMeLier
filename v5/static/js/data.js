@@ -158,9 +158,18 @@ function initializeOptions(error, data) {
         });
         selectedKeywords = Array.from(document.getElementById("keywords").selectedOptions).map(function (e) { return e.value; });
 
+        selectedGrapes = Array.from(document.getElementById("grape").selectedOptions).map(function(e) {
+            return e.value;
+        });
+
         filteredData = allData.rawData.filter(function (e) {
             if (selectedCountries != null && selectedCountries.length > 0) {
                 if (!selectedCountries.includes(e.country))
+                    return false;
+            }
+
+            if (selectedGrapes != null && selectedGrapes.length > 0) {
+                if (!selectedGrapes.includes(e.grapes))
                     return false;
             }
 
@@ -171,7 +180,6 @@ function initializeOptions(error, data) {
             }
             return true;
         });
-
         updateUI(allData, filteredData)
 
     });
