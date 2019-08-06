@@ -84,7 +84,18 @@ buttons.on('change', function(d) {
     console.log(ratings)
 });
 
-//function to get the changes in the country and grapes filter
+
+//to reset everything
+$(".reset").click(function () {
+    $('.chosen-select').val('').trigger('chosen:updated');
+    chart.selectAll("*").remove()
+    chart.selectAll("*").transition().duration(3000)
+    genGrapes(0, 1000, 0, ['all'], ['all'], ['all'])
+});
+
+
+
+//function to get the changes in the country, grapes and keywords filter
 $(".chosen-select").chosen({}).change(function(e, c) {
     // filtering country
     countries = Array.from(document.getElementById("country").selectedOptions).map(function(e) {
@@ -99,34 +110,23 @@ $(".chosen-select").chosen({}).change(function(e, c) {
 
     // filtering keywords
     keywords = Array.from(document.getElementById("keywords").selectedOptions).map(function (e) { return e.value; });
-    console.log(countries,grapes,keywords)
 
-    if (countries.length>0 & grapes.length >0 & keywords.length>0) {
-        genGrapes(0, 1000, 0, countries, grapes, keywords)
-    }
-    if (countries.length==0 & grapes.length >0 & keywords.length>0) {
-        genGrapes(0, 1000, 0, ['all'], grapes, keywords)
-    }
-    if (countries.length>0 & grapes.length ==0 & keywords.length>0) {
-        genGrapes(0, 1000, 0, countries, ['all'], keywords)
+    if(countries.length==0){
+        countries=['all']
     }
 
-    if (countries.length==0 & grapes.length ==0 & keywords.length>0) {
-        genGrapes(0, 1000, 0, ['all'], ['all'], keywords)
-    }
-    if (countries.length==0 & grapes.length ==0 & keywords.length==0) {
-        genGrapes(0, 1000, 0, ['all'], ['all'], ['all'])
-    }
-    if (countries.length==0 & grapes.length >0 & keywords.length==0) {
-        genGrapes(0, 1000, 0, ['all'], grapes, ['all'])
-    }
-    if (countries.length>0 & grapes.length >0 & keywords.length==0) {
-        genGrapes(0, 1000, 0, countries, grapes, ['all'])
+    if(grapes.length==0){
+        grapes=['all']
     }
 
-    if (countries.length>0 & grapes.length ==0 & keywords.length==0) {
-        genGrapes(0, 1000, 0, countries, ['all'], ['all'])
+    if(keywords.length==0){
+        keywords=['all']
     }
+
+    // console.log(countries,grapes,keywords)
+
+    genGrapes(0,1000,0,countries,grapes,keywords)
+    // console.log(min_price,max_price,rating)
 
 
 });
@@ -212,15 +212,19 @@ function genGrapes(min_price, max_price, rating, countries, grapes, keywords) {
                     }
                 }
             })
-            .on("mouseover", function(d, i) {
-                hoverText.text(d.Grape + ": " + d.Count);
-                hoverGroup.attr("x", d.x);
-                hoverGroup.attr("y", d.y);
-                hoverGroup.style("visibility", "visible");
-            })
-            .on("mouseout", function(d, i) {
-                hoverGroup.style("visibility", "hidden");
-            })
+            .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div.html(d.Grape + "<br>" + d.Count + " Wines")
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        })
             .on("click",function(d){
                 $('#grape').val(d.Grape).trigger('chosen:updated');
                 $('#grape').change();
@@ -257,4 +261,4 @@ function genGrapes(min_price, max_price, rating, countries, grapes, keywords) {
 
 }
 
-genGrapes(0, 1000, 0, ['all'], ['all'], ['all'])
+genGrapes(0,1000,0,countries,grapes,keywords)
