@@ -15,8 +15,8 @@ var b = {
 // var l3Color = d3.scaleLinear().domain([1,100]).range(["black", "grey"])
 
 var l1Color = d3.scaleLinear().domain([1,100]).range(["black", "#69b3a2"])
-var l2Color = d3.scaleLinear().domain([1,100]).range(["black", "steelblue"])
-var l3Color = d3.scaleLinear().domain([1,100]).range(["black", "rgba(198, 45, 205, 0.5)"])
+var l2Color = d3.scaleLinear().domain([1,100]).range(["black", "rgb(170, 90, 90)"])
+var l3Color = d3.scaleLinear().domain([1,100]).range(["black", "steelblue"])
 
 var colors = [l1Color, l2Color, l3Color]
 
